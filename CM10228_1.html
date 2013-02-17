@@ -1,0 +1,571 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+    <meta name="generator" content="http://txt2tags.sf.net">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>CM10228 - coursework 1</title>
+    <style type="text/css">
+    .purple
+    {
+        color: rgb(57, 37, 158);
+    }
+
+    .red
+    {
+        color: rgb(144, 1, 0);
+    }
+
+    h3
+    {
+        color: rgb(57, 37, 158);
+    }
+  </style>
+  </head>
+  <body style="color: black; background-color: white;">
+    <h1><a href="http://www.cs.bath.ac.uk/%7Ejjb/here/CM10228/course-sched.html">CM10228</a>
+      / Programming Ib: &nbsp; <span style="color: rgb(51, 51, 153);">Assignment
+
+
+
+        1&nbsp; (2013)</span></h1>
+    <h1><span style="color: rgb(51, 51, 153);">Exploring the Dungeon of
+        Dooom</span></h1>
+    <br>
+    <hr style="width: 100%; height: 2px;">
+    <h3 style="color: black;">Assignment Date: &nbsp;Tuesday,&nbsp; 12
+      February&nbsp; <span style="color: rgb(204, 0, 0);">Due date</span>:&nbsp;
+
+      Friday,&nbsp; <span style="color: rgb(204, 0, 0);">1 March</span>
+      at <span style="color: rgb(204, 0, 0);">11:00 PM</span><br>
+    </h3>
+    <br>
+    This assignment is the first of three you will have in this unit.
+    &nbsp;Your mark in Programming Ib is composed of 50% coursework, 50%
+    exam.&nbsp; This assignment is worth<span style="font-weight: bold;
+      color: rgb(51, 51, 153); text-decoration: line-through;"></span> <span style="font-weight: bold; color: rgb(0, 153, 0);">15%</span> of
+    your final mark for the unit. The assignments are:<br>
+    <br>
+    <table style="text-align: left; width: 80%; margin-left: auto;
+      margin-right: auto;" title="Coursework 2010" border="1" cellpadding="2" cellspacing="2">
+      <caption><br>
+      </caption><tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: middle;
+            background-color: rgb(204, 204, 255);">Courseworks<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 255);"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 255);">Mark<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 255);">Handed Out<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 255);">Due<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            255, 255);">1<br>
+          </td>
+          <td style="vertical-align: top;"><span style="font-weight:
+              bold; color: rgb(153, 0, 0);">Dungeon of Dooom</span>:
+            Exploring the Dungeon</td>
+          <td style="vertical-align: top;"> <span style="font-weight:
+              bold;">15%</span><br>
+          </td>
+          <td style="vertical-align: top;">12th February<br>
+          </td>
+          <td style="vertical-align: top;">1 March<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            255, 255);">2<br>
+          </td>
+          <td style="vertical-align: top;"><span style="font-weight:
+              bold; color: rgb(153, 0, 0);">Dungeon of Dooom</span>:&nbsp;
+
+
+
+            Networking and multiple concurrent agents in one dungeon</td>
+          <td style="vertical-align: top; font-weight: bold;">10%<br>
+          </td>
+          <td style="vertical-align: top;">5 March<br>
+          </td>
+          <td style="vertical-align: top;">15 March<br>
+            Demoed in lab 18-22 March<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            255, 255);">3<br>
+          </td>
+          <td style="vertical-align: top;"><span style="font-weight:
+              bold; color: rgb(153, 0, 0);">Dungeon of Dooom</span>:&nbsp;
+
+
+
+            GUIs to show your friends &amp; family</td>
+          <td style="vertical-align: top;"> <span style="font-weight:
+              bold;">25%</span><br>
+          </td>
+          <td style="vertical-align: top;">19 March<br>
+          </td>
+          <td style="vertical-align: top;">19 April<br>
+            Demoed in lab 22-26 April<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            255, 255);"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(255,
+            255, 204);">Exam<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(255,
+            255, 204);">50%<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(255,
+            255, 204);">May<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(255,
+            255, 204);"><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <hr style="width: 100%; height: 2px;"><br>
+    <h2>Objectives</h2>
+    <p> This assignment will introduce you to the <b class="red">Dungeon
+
+
+
+        of Dooom</b>, the game environment for most of this year's
+      coursework.&nbsp; The first coursework emphasises reading and
+      writing to streams and manipulating memory and data structures. </p>
+    <p> The game takes place in a two-dimensional space (a dungeon). The
+      objective of the game is to gather a set amount of gold, and then
+      find the exit of the dungeon. The rules of the game that you will
+      need to follow (along with this coursework spec) can be found <a href="http://www.cs.bath.ac.uk/%7Ejjb/here/CM10228/CW2013/cw1_game_rules.pdf">here</a>. When there are multiple
+      players, it becomes a bit more complicated, but for Coursework 1
+      the objectives are relatively simple. </p>
+    <p> This coursework has the following code objectives: </p>
+    <ol>
+      <li>We have provided you with some sample ASCII-art maps. You will
+        need to read a map like one of these in from a file &amp;
+        convert them into a two-dimensional array suitable for game play
+        (<span class="purple">int</span>[][] or <span class="purple">char</span>[][]).</li>
+      <ol>
+        <li><a href="http://www.cs.bath.ac.uk/%7Ejjb/here/CM10228/CW2012/example_map_1">Simple
+
+
+            map</a></li>
+        <li><a href="http://www.cs.bath.ac.uk/%7Ejjb/here/CM10228/CW2012/example_map_2">More
+
+
+            complicated map</a><br>
+        </li>
+      </ol>
+      <li>You will need to create a command-line interface that allows a
+        user to control a player in the game using the commands provided
+        in the description document. </li>
+      <li>You will need to create a bot that can play the game for you.
+        The bot is not allowed to use the map that the game has, but,
+        like you, should only `look' at the information the game engine
+        gives it.&nbsp; Note that the bot does not need to be very smart
+        in order for you to pass -- it just needs to be able to wander
+        around the dungeon until it has gathered enough gold, then to
+        wander around the dungeon until it finds the exit, then exit. </li>
+    </ol>
+    <p> <b class="purple">Your code must run from the command line:</b>
+      this is how we will be marking it.&nbsp; We want to know that you
+      can compile your code on your own, and that you know what the main
+      function of your program is.&nbsp; The code should be platform and
+      operating-system independent.&nbsp; It should run in <b class="red">Java 1.6</b>.&nbsp; To be safe, you should probably
+      test that your code works on one of the BUCS servers <i>(At time
+        of writing LCPU has Java 1.6 and Amos, Mary, Midge have Java
+        1.5)</i> </p>
+    <p> This assignment is expected to take the average student (one who
+      got about 58 in Programming I) about 15 hours.&nbsp; As mentioned
+      in class, this is a double unit, so it is expected you spend at
+      least 12 hours a week of self-study on the course, besides the two
+      hours in lab and the two hours in lecture.&nbsp; We expect you
+      will spend 7.5 self-study hours a week for the next two weeks on
+      this assignment, in addition to the two hours you have in
+      lab.&nbsp; (Note that this still leaves you plenty of time for
+      lecture preparation.)&nbsp;&nbsp; Because programming takes
+      different people radically different amounts of time, some
+      students will spend something more or less than 15 hours on this
+      assignment (Coursework 1). </p>
+    <p> <b class="purple"> An important note on plagiarism:</b>
+      &nbsp;Plagiarism occurs any time that you use someone else's ideas
+      without acknowledging them. &nbsp;Plagiarism is much, much worse
+      than asking for help (in fact, asking for help isn't bad at
+      all.)&nbsp; If you get help on any part of your assignment you
+      should acknowledge this <b class="purple">in the comments</b>.
+      This includes asking coursemates, tutors, or other staff
+      questions, and of course any code or ideas you get from&nbsp;
+      books or the Internet. &nbsp;<b class="red">Say exactly where your
+        ideas came from, and exactly how much of the code you hand in is
+        your own. </b><span class="red"><font color="#000000">Attribution
+
+          magically changes plagiarism (evil) into citation (good).</font></span>
+    </p>
+    <h2>What to do:</h2>
+    We strongly suggest you get each item of the below working in the
+    order suggested,&nbsp; &amp; then <font color="#333399"><b>test it</b></font>
+    before moving to the next step.&nbsp; Note in particular that you
+    can pass the coursework without ever building a bot, and you can get
+    decent marks with a truly stupid bot that walks into walls.<br>
+    <ol>
+      <li>Create a class Map that:
+        <ol>
+          <li>Reads one of the sample ASCII-art map files (your code
+            should be able to load any map written in the same format).
+          </li>
+          <li>Stores the map information in a 2D array (<span class="purple">int</span>[][] or <span class="purple">char</span>[][]).
+
+          </li>
+          <!--<li>Has a method that prints the 2D array to another file, so
+            that the correct reading of the maps can be verified by
+            using "diff" in unix (or by looking at it if you use
+            microsoft). </li>-->
+        </ol>
+      </li>
+      <li>Create a class GameLogic that:
+        <ol>
+          <li>Uses Map to load a map from file. </li>
+          <li>Randomly positions a player within a map (on a non-wall
+            space). </li>
+          <li>Supports methods which fulfil the <a href="http://www.cs.bath.ac.uk/%7Ejjb/here/CM10228/CW2013/cw1_game_rules.pdf">game
+
+
+
+              rules</a>. </li>
+        </ol>
+      </li>
+      <li>Create a class PlayGame, which uses the Command-line Interface
+        (CLI) to interact with the user (this is where your main method
+        should be), which:</li>
+      <ol>
+        <li>Reads &amp; writes to STDIN and STDOUT (the command line).<br>
+        </li>
+        <li>Allows a user to control a player in the world using the
+          commands listed in the <a href="http://www.cs.bath.ac.uk/%7Ejjb/here/CM10228/CW2013/cw1_game_rules.pdf">game
+            rules</a> (calls the appropriate methods in GameLogic). </li>
+      </ol>
+      <li>Create a Bot class that:
+        <ol>
+          <li>Can play the game (as a drop-in replacement for PlayGame).</li>
+          <li>Basic bot should:
+            <ol>
+              <li>Escape if it happens to be standing on the exit.</li>
+              <li>Move, at least randomly.</li>
+              <li>It's better if it doesn't try to walk through walls. </li>
+              <li>Pick up items that it lands on (currently only gold.)<br>
+              </li>
+            </ol>
+          </li>
+          <li>For higher marks, the bot should be more advanced.&nbsp;
+            For details of this, see later in this coursework spec under
+            "distinction."
+            <!--<i>Note that for higher level bots, you may
+              need to make the bot play at the same time as the player
+              (either turn-based or concurrently), but for simple bot
+              you can have it play instead of the player.</i>--></li>
+        </ol>
+      </li>
+    </ol>
+    <h4>A note on class organisation</h4>
+    For this coursework, your program can have two entry points (main
+    methods), and your classes should be laid out as follows: <img src="CM10228_1_files/prog1bcw1classes.png">
+    <h2>What to hand in:</h2>
+    <p> Submit on Moodle a file named <i>&lt;yourUsername&gt;-coursework1.zip</i>
+      or <i>&lt;yourUsername&gt;-coursework1.tar.gz</i> file
+      containing: </p>
+    <ol>
+      <li>The brief specification you wrote when you were designing your
+        program.&nbsp; About half a page.<br>
+      </li>
+      <li>Your fully-commented uncompiled code for all the classes you
+        wrote.
+        <ul>
+          <li>Poor program layout will lose marks! </li>
+          <li>Poor coding will lose marks, e.g. extraneous code, sorting
+            things that do not need to be sorted, other silliness.&nbsp;
+            <ul>
+              <li>You should clean up your code once you get it working,
+                just like you would clean up the first draft of an essay
+                before handing it in.&nbsp; </li>
+              <li>The person marking your program will compile and run
+                your program.&nbsp; They may not use the same operating
+                system you do.&nbsp; Nothing in your program should
+                depend on (for example) hard-coded file locations. </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Brief instructions about how to demonstrate your bot, and how
+        to load your maps.
+        <ol>
+          <li>Notice that the maps should be in the specified format, so
+            that you can load your friend's maps etc. </li>
+          <li>The instructions are for your tutor. Be sure that someone
+            who does not know you or the project can quickly get your
+            code working. </li>
+        </ol>
+      </li>
+      <li>A brief report / analysis of the performance of your
+        code.&nbsp; Include a discussion of what you did, why you did
+        what you did, and what you would do if you did it again. About
+        one page. </li>
+    </ol>
+    <p> <i class="purple">Upload the file to moodle by the time
+        specified.</i> Failure to name your submission file correctly <b class="red">will</b> incur a penalty. Remember, marks are not
+      given just because a program compiles or runs. &nbsp;It should run
+      robustly, and it should be well commented and well documented as
+      specified above. </p>
+    <h2>How you will be marked:</h2>
+    <p> The marks allocation for this assignment is as follows: </p>
+    <ol>
+      <li>Fully commented, working programs implementing your design
+        80%&nbsp; </li>
+      <li>A report of no more than one and a half pages including the
+        program design (half page), testing and analysis 20%&nbsp; </li>
+    </ol>
+    <p> Total 100% </p>
+    <h3>Threshold for Pass (40%+)</h3>
+    <ol>
+      <li>Simple program. Basic level of commenting. Code layout is
+        mostly correct.&nbsp; Code contains core functionality:
+        <ol>
+          <li>Reads in a map &amp; can use it. </li>
+          <li>Command Line Interface allows control of the player on the
+            map that has been read. </li>
+        </ol>
+      </li>
+      <li>(It is possible a program will pass if exceptionally well
+        commented &amp; analyzed but does not work correctly.) </li>
+      <li>Basic testing; Basic error checking; Little or no analysis. </li>
+    </ol>
+    <h3>Good Pass (~55%+)</h3>
+    <ol>
+      <li>Good program design. Algorithms are given at an appropriate
+        level of detail and are well explained. </li>
+      <li>Program is a good implementation of design, or possibly better
+        than the design. Layout of code is correct and clear. Code is
+        generally concise but comprehensible, identifiers well named. </li>
+      <li>Bot able to move around randomly, will eventually exit. The
+        bot should also:
+        <ol>
+          <li>Not try to walk through walls </li>
+          <li>Pick up any items that it lands on </li>
+        </ol>
+      </li>
+      <li>Description of testing and development; Good Error Checking in
+        the code; Good analysis &amp; reflection.
+        <ol>
+          <li>Reflection might include a discussion of the program and
+            the development process you undertook, ideas for
+            improvement.&nbsp; </li>
+        </ol>
+      </li>
+    </ol>
+    <h3>Distinction (70%+)</h3>
+    <ol>
+      <li>Clear, well-communicated program design.<br>
+      </li>
+      <li>A sophisticated program showing good use of Java, but not
+        overly complex. Commenting is appropriate and gives sufficient
+        information but does not clutter. Layout of code is correct and
+        clear. </li>
+      <li>Results are clear and presented in an interesting way. Testing
+        &amp; analysis of the impact of the bot's intelligence on its
+        efficiency escaping the dungeon. Analysis of the complexity of
+        the bot's search for the exit.&nbsp; </li>
+      <li>Excellent reflection on results, possibly considering
+        alternative implementations.&nbsp; A thoughtful discussion of
+        the program and the development process you undertook. Detailed
+        and thoughtful criticism of your work, and well-thought-out
+        ideas for improvement.&nbsp; Entire write up is no more than 1.5
+        pages of text. </li>
+      <li>A more intelligent bot, including behaviour such as <i>(but
+          not limited to!)</i> the following:
+        <ol>
+          <li>Going towards interesting things it sees in nearby
+            squares. </li>
+          <li>Going around walls if it sees interesting things on the
+            other side of a wall. </li>
+          <!--<li>Being able to follow the player.<br>-->
+        </ol>
+        <i>Note that this is the area where to get full marks you need
+          to go over and above what is specified here.</i> </li>
+    </ol>
+    <h2>Marks Table:</h2>
+    <table style="width: 80%; text-align: left; margin-left: auto;
+      margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 255); font-weight: bold;"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;">Specific Criteria</td>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;">Marks<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;">Out Of<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;">Code<br>
+          </td>
+          <td style="vertical-align: top;">Map Reading &amp; Storage<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">20<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;"><br>
+          </td>
+          <td style="vertical-align: top;">Game Interface (Command Line)<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">20<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;"><br>
+          </td>
+          <td style="vertical-align: top;">Basic Bot<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">10<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;"><br>
+          </td>
+          <td style="vertical-align: top;">Bot Cleverness<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">30<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;">Results &amp; Analysis</td>
+          <td style="vertical-align: top;">Testing &amp; Report<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">20<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255);"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(255,
+            221, 221);"><span style="font-weight: bold;">Penalties<br>
+            </span>e.g. no instructions, does not compile, <br>
+            difficult to test, failure to encapsulate<br>
+            the game engine map from<br>
+            the AIbot, platform dependencies<br>
+            <br>
+          </td>
+          <td style="vertical-align: top;">Explanation: </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">(10)<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(255,
+            221, 221);"><span style="font-weight: bold;"></span><br>
+          </td>
+          <td style="vertical-align: top;">Poor/No Commenting </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">(20)<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(255,
+            221, 221);"><span style="font-weight: bold;"></span><br>
+          </td>
+          <td style="vertical-align: top;">Poor Code Layout </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">(20)<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 255); font-weight: bold;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(221,
+            221, 255); font-weight: bold;">Total<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">100<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <ol>
+      <ol>
+      </ol>
+    </ol>
+    <hr style="width: 100%; height: 2px;"><a><i> page author: </i></a><i><a href="http://www.bath.ac.uk/comp-sci/people/jjb.shtml">Joanna
+        Bryson</a>, with Andy Ridge &amp; Andy Chinery<br>
+      11 February 2013 (checked by MDV 12 Feb 2013)<br>
+      <span style="color: rgb(153, 0, 0);"><br>
+      </span></i>
+  
+
+</body></html>
