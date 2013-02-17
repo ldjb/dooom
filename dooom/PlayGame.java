@@ -8,20 +8,6 @@ class PlayGame {
 	private static char[][] mapData;
 	private static int[] playerCoords = new int[2];
 	private static int gold = 0;
-	private static String outputBuffer = "";
-	
-	private static void printOutput() {
-		System.out.print(outputBuffer);
-		outputBuffer = "";
-	}
-	
-	private static void clearScreen() {
-		String blank = "";
-		for (int i=0 ; i<50 ; i++) {
-			blank += "\n";
-		}
-		System.out.print(blank);
-	}
 	
 	private static String selectMap() throws Exception {
 		int fileCount;
@@ -29,33 +15,33 @@ class PlayGame {
 		String[] filteredFileList;
 		String input = null;
 		do {
-			outputBuffer += "WELCOME TO DUNGEON OF DOOOM!\n\n";
-			outputBuffer += "Type the number to select a map:\n";
+			OutputHandler.addToOutput("WELCOME TO DUNGEON OF DOOOM!\n\n");
+			OutputHandler.addToOutput("Type the number to select a map:\n");
 			File[] fileList = new File("maps").listFiles();
 			filteredFileList = new String[fileList.length];
 			fileCount = 0;
 			for (int i=0 ; i<fileList.length ; i++) {
 				if (fileList[i].isFile() & !fileList[i].getName().startsWith(".")) {
 					filteredFileList[fileCount] = fileList[i].getName();
-					outputBuffer += "[" + (fileCount + 1) + "] " + fileList[i].getName() + "\n";
+					OutputHandler.addToOutput("[" + (fileCount + 1) + "] " + fileList[i].getName() + "\n");
 					fileCount++;
 				}
 			}
 			if (input == null) {
-				outputBuffer += "\n\n\n> ";
+				OutputHandler.addToOutput("\n\n\n> ");
 			}
 			else if (input.toUpperCase().equals("QUIT")) {
-				outputBuffer += "\n> " + input + "\nThanks for playing!\n";
-				printOutput();
+				OutputHandler.addToOutput("\n> " + input + "\nThanks for playing!\n");
+				OutputHandler.printOutput();
 				System.exit(0);
 			}
 			else {
-				outputBuffer += "\n> " + input + "\nInvalid input.\n> ";
+				OutputHandler.addToOutput("\n> " + input + "\nInvalid input.\n> ");
 			}
-			printOutput();
+			OutputHandler.printOutput();
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			input = in.readLine();
-			clearScreen();
+			OutputHandler.clearScreen();
 			try {
 				fileNumber = Integer.parseInt(input) - 1;
 			}
@@ -119,15 +105,15 @@ class PlayGame {
 			int symbolCounter = 0;
 			for (char symbol : line) {
 				if (lineCounter == playerCoords[0] & symbolCounter == playerCoords[1]) {
-					outputBuffer += "P";
+					OutputHandler.addToOutput("P");
 				}
 				else {
-					outputBuffer += symbol;
+					OutputHandler.addToOutput(symbol);
 				}
 				symbolCounter++;
 			}
 			lineCounter++;
-			outputBuffer += "\n";
+			OutputHandler.addToOutput("\n");
 		}
 	}
 
@@ -200,34 +186,34 @@ class PlayGame {
 	}
 
 	public static String[] promptUser() throws Exception {
-		outputBuffer += "> ";
-		printOutput();
+		OutputHandler.addToOutput("> ");
+		OutputHandler.printOutput();
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String input = in.readLine();
-		clearScreen();
+		OutputHandler.clearScreen();
 		String[] returnArray = {input, processCommand(input)};
 		return returnArray;
 	}
 
 	public static void main(String[] args) throws Exception {
-		clearScreen();
+		OutputHandler.clearScreen();
 		load();
 		String[] inputOutput = {null, null};
 		while (true) {
-			outputBuffer += "DUNGEON OF DOOOM\n";
-			outputBuffer += name + " (" + Math.max(0, win - gold) + ")\n\n";
+			OutputHandler.addToOutput("DUNGEON OF DOOOM\n");
+			OutputHandler.addToOutput(name + " (" + Math.max(0, win - gold) + ")\n\n");
 			printMap();
-			outputBuffer += "\n";
+			OutputHandler.addToOutput("\n");
 			if (inputOutput[0] != null) {
-				outputBuffer += "> " + inputOutput[0] + "\n";
-				outputBuffer += inputOutput[1] + "\n";
-				printOutput();
+				OutputHandler.addToOutput("> " + inputOutput[0] + "\n");
+				OutputHandler.addToOutput(inputOutput[1] + "\n");
+				OutputHandler.printOutput();
 				if (inputOutput[0].toUpperCase().equals("QUIT") | inputOutput[1].startsWith("Congrat")) {
 					System.exit(0);
 				}
 			}
 			else {
-				outputBuffer += "\n\n";
+				OutputHandler.addToOutput("\n\n");
 			}
 			inputOutput = promptUser();
 		}
