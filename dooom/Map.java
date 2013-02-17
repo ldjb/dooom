@@ -106,10 +106,6 @@ class Map {
 		}
 	}
 	
-	public static boolean isWall(int row, int col) { // TO BE DEPRECATED
-		return mapData[row][col] == '#';
-	}
-	
 	public static char symbolAt(int row, int col) {
 		return mapData[row][col];
 	}
