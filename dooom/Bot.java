@@ -47,42 +47,6 @@ class Bot {
 			else {
 				break;
 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-1) == desire
-// 			  | Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+1) == desire) {
-// 				return sendCommand("MOVE N");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-1) == desire
-// 			  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+1) == desire) {
-// 				return sendCommand("MOVE S");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]) == desire) {
-// 				return sendCommand("MOVE N");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]) == desire) {
-// 				return sendCommand("MOVE S");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+2) == desire) {
-// 				return sendCommand("MOVE E");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-2) == desire) {
-// 				return sendCommand("MOVE W");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]-1) == desire
-// 			  | Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]+1) == desire) {
-// 				return sendCommand("MOVE N");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]-1) == desire
-// 			  | Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]+1) == desire) {
-// 				return sendCommand("MOVE S");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+2) == desire
-// 			  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+2) == desire) {
-// 				return sendCommand("MOVE E");
-// 			}
-// 			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-2) == desire
-// 			  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-2) == desire) {
-// 				return sendCommand("MOVE W");
-// 			}
 		}
 		while (true) {
 			double random = Math.random();
