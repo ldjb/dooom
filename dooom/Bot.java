@@ -25,21 +25,64 @@ class Bot {
 			return sendCommand("PICKUP");
 		}
 		while (true) {
-			String possibilities = "";
-			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) == desire) {
-				possibilities += "N";
-			}
-			if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) == desire) {
-				possibilities += "S";
-			}
-			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) == desire) {
-				possibilities += "E";
-			}
-			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) == desire) {
-				possibilities += "W";
-			}
-			if (possibilities.length() > 0) {
-				return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
+			int priority = 0;
+			while (true) {
+				String possibilities = "";
+				if (priority == 0) {
+					if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) == desire) {
+						possibilities += "N";
+					}
+					if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) == desire) {
+						possibilities += "S";
+					}
+					if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) == desire) {
+						possibilities += "E";
+					}
+					if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) == desire) {
+						possibilities += "W";
+					}
+				}
+				if (priority == 1) {
+					if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-1) == desire) {
+						if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) != '#') {
+							possibilities += "N";
+						}
+/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) != '#') {
+							possibilities += "W";
+						}
+					}
+					if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+1) == desire) {
+						if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) != '#') {
+							possibilities += "N";
+						}
+/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) != '#') {
+							possibilities += "E";
+						}
+					}
+					if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+1) == desire) {
+						if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) != '#') {
+							possibilities += "S";
+						}
+/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) != '#') {
+							possibilities += "E";
+						}
+					}
+					if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-1) == desire) {
+						if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) != '#') {
+							possibilities += "S";
+						}
+/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) != '#') {
+							possibilities += "W";
+						}
+					}
+				}
+				if (priority == 2) {
+					break;
+				}
+				if (possibilities.length() > 0) {
+					return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
+				}
+				priority++;
 			}
 			if (desire != '.') {
 				desire = '.';
