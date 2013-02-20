@@ -12,7 +12,10 @@ class Bot {
 	}
 	
 	public static void updateDesire() {
-		if (GameLogic.getGold() >= GameLogic.getWin()) {
+		if (GameLogic.getGold() < GameLogic.getWin()) {
+			desire = 'G';
+		}
+		else {
 			desire = 'E';
 		}
 	}
@@ -21,54 +24,62 @@ class Bot {
 		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]) == desire) {
 			return sendCommand("PICKUP");
 		}
-		if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) == desire) {
-			return sendCommand("MOVE N");
+		while (true) {
+			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) == desire) {
+				return sendCommand("MOVE N");
+			}
+			if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) == desire) {
+				return sendCommand("MOVE S");
+			}
+			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) == desire) {
+				return sendCommand("MOVE E");
+			}
+			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) == desire) {
+				return sendCommand("MOVE W");
+			}
+			if (desire != '.') {
+				desire = '.';
+			}
+			else {
+				break;
+			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-1) == desire
+// 			  | Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+1) == desire) {
+// 				return sendCommand("MOVE N");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-1) == desire
+// 			  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+1) == desire) {
+// 				return sendCommand("MOVE S");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]) == desire) {
+// 				return sendCommand("MOVE N");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]) == desire) {
+// 				return sendCommand("MOVE S");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+2) == desire) {
+// 				return sendCommand("MOVE E");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-2) == desire) {
+// 				return sendCommand("MOVE W");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]-1) == desire
+// 			  | Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]+1) == desire) {
+// 				return sendCommand("MOVE N");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]-1) == desire
+// 			  | Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]+1) == desire) {
+// 				return sendCommand("MOVE S");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+2) == desire
+// 			  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+2) == desire) {
+// 				return sendCommand("MOVE E");
+// 			}
+// 			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-2) == desire
+// 			  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-2) == desire) {
+// 				return sendCommand("MOVE W");
+// 			}
 		}
-		if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) == desire) {
-			return sendCommand("MOVE S");
-		}
-		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) == desire) {
-			return sendCommand("MOVE E");
-		}
-		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) == desire) {
-			return sendCommand("MOVE W");
-		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-1) == desire
-// 		  | Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+1) == desire) {
-// 			return sendCommand("MOVE N");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-1) == desire
-// 		  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+1) == desire) {
-// 			return sendCommand("MOVE S");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]) == desire) {
-// 			return sendCommand("MOVE N");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]) == desire) {
-// 			return sendCommand("MOVE S");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+2) == desire) {
-// 			return sendCommand("MOVE E");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-2) == desire) {
-// 			return sendCommand("MOVE W");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]-1) == desire
-// 		  | Map.symbolAt(GameLogic.playerCoords[0]-2, GameLogic.playerCoords[1]+1) == desire) {
-// 			return sendCommand("MOVE N");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]-1) == desire
-// 		  | Map.symbolAt(GameLogic.playerCoords[0]+2, GameLogic.playerCoords[1]+1) == desire) {
-// 			return sendCommand("MOVE S");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+2) == desire
-// 		  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+2) == desire) {
-// 			return sendCommand("MOVE E");
-// 		}
-// 		if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-2) == desire
-// 		  | Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-2) == desire) {
-// 			return sendCommand("MOVE W");
-// 		}
 		while (true) {
 			double random = Math.random();
 			if (random < 0.25) {
