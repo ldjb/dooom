@@ -101,7 +101,7 @@ class PlayGame {
 			return "Developed by Leon Byford (2013) <ldjb20@bath.ac.uk>";
 		}
 		else {
-			return "No such command. Type \"HELP\" for list of available commands.";
+			return "Invalid command. Type \"HELP\" for list of available commands.";
 		}
 	}
 
