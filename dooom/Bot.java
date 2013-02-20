@@ -20,71 +20,98 @@ class Bot {
 		}
 	}
 
+	public static char relSymbol(int y, int x) {
+		return Map.symbolAt(GameLogic.playerCoords[0]+y, GameLogic.playerCoords[1]+x);
+	}
+
 	public static String[] nextCommand() throws Exception {
 		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]) == desire) {
 			return sendCommand("PICKUP");
 		}
 		while (true) {
-			int priority = 0;
+			int possibleMoves = 1;
 			while (true) {
 				String possibilities = "";
-				if (priority == 0) {
-					if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) == desire) {
+				if (possibleMoves == 1) {
+					if (relSymbol(-1, 0) == desire) {
 						possibilities += "N";
 					}
-					if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) == desire) {
+					if (relSymbol(1, 0) == desire) {
 						possibilities += "S";
 					}
-					if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) == desire) {
+					if (relSymbol(0, 1) == desire) {
 						possibilities += "E";
 					}
-					if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) == desire) {
+					if (relSymbol(0, -1) == desire) {
 						possibilities += "W";
 					}
 				}
-				if (priority == 1) {
-					if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]-1) == desire) {
-						if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) != '#') {
+				if (possibleMoves == 2) {
+					if (relSymbol(-1, -1) == desire) {
+						if (relSymbol(-1, 0) != '#') {
 							possibilities += "N";
 						}
-/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) != '#') {
+/* else if(?) */		if (relSymbol(0, -1) != '#') {
 							possibilities += "W";
 						}
 					}
-					if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]+1) == desire) {
-						if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) != '#') {
+					if (relSymbol(-1, 1) == desire) {
+						if (relSymbol(-1, 0) != '#') {
 							possibilities += "N";
 						}
-/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) != '#') {
+/* else if(?) */		if (relSymbol(0, 1) != '#') {
 							possibilities += "E";
 						}
 					}
-					if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]+1) == desire) {
-						if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) != '#') {
+					if (relSymbol(1, 1) == desire) {
+						if (relSymbol(1, 0) != '#') {
 							possibilities += "S";
 						}
-/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) != '#') {
+/* else if(?) */		if (relSymbol(0, 1) != '#') {
 							possibilities += "E";
 						}
 					}
-					if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]-1) == desire) {
-						if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) != '#') {
+					if (relSymbol(1, -1) == desire) {
+						if (relSymbol(1, 0) != '#') {
 							possibilities += "S";
 						}
-/* else if(?) */		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) != '#') {
+/* else if(?) */		if (relSymbol(0, -1) != '#') {
+							possibilities += "W";
+						}
+					}
+					if (relSymbol(-2, 0) == desire) {
+						if (relSymbol(-1, 0) != '#') {
+							possibilities += "N";
+						}
+					}
+					if (relSymbol(0, 2) == desire) {
+						if (relSymbol(0, 1) != '#') {
+							possibilities += "E";
+						}
+					}
+					if (relSymbol(2, 0) == desire) {
+						if (relSymbol(1, 0) != '#') {
+							possibilities += "S";
+						}
+					}
+					if (relSymbol(0, -2) == desire) {
+						if (relSymbol(0, -1) != '#') {
 							possibilities += "W";
 						}
 					}
 				}
-				if (priority == 2) {
+				if (possibleMoves == 3) {
 					break;
 				}
 				if (possibilities.length() > 0) {
 					return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
 				}
-				priority++;
+				possibleMoves++;
 			}
-			if (desire != '.') {
+			if (desire == 'E') {
+				desire = 'G';
+			}
+			else if (desire == 'G') {
 				desire = '.';
 			}
 			else {
