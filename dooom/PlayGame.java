@@ -62,7 +62,34 @@ class PlayGame {
 			}
 		}
 		else if (command.toUpperCase().equals("LOOK")) {
-			return Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1])) + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1])) + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]+1)) + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]-1));
+			return "LOOKREPLY\n"
+				 + "X"
+				 + Character.toString(Map.symbolAt(playerCoords[0]-2, playerCoords[1]-1))
+				 + Character.toString(Map.symbolAt(playerCoords[0]-2, playerCoords[1]))
+				 + Character.toString(Map.symbolAt(playerCoords[0]-2, playerCoords[1]+1))
+				 + "X\n"
+				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]-2))
+				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]-1))
+				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]))
+				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]+1))
+				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]+2))
+				 + "\n"
+				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]-2))
+				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]-1))
+				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]))
+				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]+1))
+				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]+2))
+				 + "\n"
+				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]-2))
+				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]-1))
+				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]))
+				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]+1))
+				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]+2))
+				 + "\nX"
+				 + Character.toString(Map.symbolAt(playerCoords[0]+2, playerCoords[1]-1))
+				 + Character.toString(Map.symbolAt(playerCoords[0]+2, playerCoords[1]))
+				 + Character.toString(Map.symbolAt(playerCoords[0]+2, playerCoords[1]+1))
+				 + "X";
 		}
 		else if (command.toUpperCase().equals("QUIT")) {
 			return "Thanks for playing!";
