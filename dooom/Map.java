@@ -107,6 +107,9 @@ class Map {
 	}
 	
 	public static char symbolAt(int row, int col) {
+		if (row < 0 | row >= mapSize[0] | col < 0 | col >= mapSize[1]) {
+			return '#';
+		}
 		return mapData[row][col];
 	}
 
