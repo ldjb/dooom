@@ -88,13 +88,13 @@ class Map {
 		}
 	}
 	
-	public static void print(int playerRow, int playerCol) {
+	public static void print(char playerSymbol, int playerRow, int playerCol) {
 		int lineCounter = 0;
 		for (char[] line : mapData) {
 			int symbolCounter = 0;
 			for (char symbol : line) {
 				if (lineCounter == playerRow & symbolCounter == playerCol) {
-					OutputHandler.addToOutput("P");
+					OutputHandler.addToOutput(playerSymbol);
 				}
 				else {
 					OutputHandler.addToOutput(symbol);
