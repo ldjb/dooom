@@ -25,17 +25,21 @@ class Bot {
 			return sendCommand("PICKUP");
 		}
 		while (true) {
+			String possibilities = "";
 			if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) == desire) {
-				return sendCommand("MOVE N");
+				possibilities += "N";
 			}
 			if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) == desire) {
-				return sendCommand("MOVE S");
+				possibilities += "S";
 			}
 			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) == desire) {
-				return sendCommand("MOVE E");
+				possibilities += "E";
 			}
 			if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) == desire) {
-				return sendCommand("MOVE W");
+				possibilities += "W";
+			}
+			if (possibilities.length() > 0) {
+				return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
 			}
 			if (desire != '.') {
 				desire = '.';
