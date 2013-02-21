@@ -101,6 +101,69 @@ class Bot {
 					}
 				}
 				if (possibleMoves == 3) {
+					if (relSymbol(-2, 1) == desire) {
+						if (relSymbol(-2, 0) != '#') {
+							if (relSymbol(-1, 0) != '#') {
+								possibilities += "N";
+							}
+						}
+						if (relSymbol(-1, 1) != '#') {
+							if (relSymbol(-1, 0) != '#') {
+								possibilities += "N";
+							}
+							if (relSymbol(0, 1) != '#') {
+								possibilities += "E";
+							}
+						}
+					}
+					if (relSymbol(-1, 2) == desire) {
+						if (relSymbol(0, 2) != '#') {
+							if (relSymbol(0, 1) != '#') {
+								possibilities += "E";
+							}
+						}
+						if (relSymbol(-1, 1) != '#') {
+							if (relSymbol(-1, 0) != '#') {
+								possibilities += "N";
+							}
+							if (relSymbol(0, 1) != '#') {
+								possibilities += "E";
+							}
+						}
+					}
+					if (relSymbol(1, 2) == desire) {
+						if (relSymbol(0, 2) != '#') {
+							if (relSymbol(0, 1) != '#') {
+								possibilities += "E";
+							}
+						}
+						if (relSymbol(1, 1) != '#') {
+							if (relSymbol(1, 0) != '#') {
+								possibilities += "S";
+							}
+							if (relSymbol(0, 1) != '#') {
+								possibilities += "E";
+							}
+						}
+					}
+					if (relSymbol(2, 1) == desire) {
+						if (relSymbol(2, 0) != '#') {
+							if (relSymbol(1, 0) != '#') {
+								possibilities += "S";
+							}
+						}
+						if (relSymbol(1, 1) != '#') {
+							if (relSymbol(1, 0) != '#') {
+								possibilities += "S";
+							}
+							if (relSymbol(0, 1) != '#') {
+								possibilities += "E";
+							}
+						}
+					}
+					// still four more
+				}
+				if (possibleMoves == 4) {
 					break;
 				}
 				if (possibilities.length() > 0) {
