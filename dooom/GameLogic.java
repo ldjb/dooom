@@ -15,7 +15,6 @@ class GameLogic {
 	}
 
 	public static String movePlayer(char direction) {
-		Map.setSymbol(playerCoords[0], playerCoords[1], 's'); //not ideal
 		String returnValue = "FAIL";
 		switch (direction) {
 			case 'N':	if (Map.symbolAt(playerCoords[0] - 1, playerCoords[1]) != '#') {

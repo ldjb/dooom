@@ -1,6 +1,18 @@
 class Bot {
 
 	private static char desire = 'G';
+	private static char[][] mapData;
+
+	public static void markAsSeen() {
+		if (relSymbol(0, 0) != 'E') {
+			mapData[GameLogic.getCoords()[0]][GameLogic.getCoords()[1]] = 'S';
+		}
+	}
+
+	public static void initMap() {
+		mapData = new char[Map.getSize()[0]][Map.getSize()[1]];
+		markAsSeen();
+	}
 
 	public static String[] sendCommand(String command) throws Exception {
 		OutputHandler.addToOutput("> " + command);
@@ -21,11 +33,17 @@ class Bot {
 	}
 
 	public static char relSymbol(int y, int x) {
+		if (GameLogic.getCoords()[0]+y < 0 | GameLogic.getCoords()[0]+y >= Map.getSize()[0] | GameLogic.getCoords()[1]+x < 0 | GameLogic.getCoords()[1]+x >= Map.getSize()[1]) {
+			return '#';
+		}
+		if (mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x] != '\u0000') {
+			return mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x];
+		}
 		return Map.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
 	}
 
 	public static String[] nextCommand() throws Exception {
-		if (Map.symbolAt(GameLogic.getCoords()[0], GameLogic.getCoords()[1]) == desire) {
+		if (relSymbol(0, 0) == desire) {
 			return sendCommand("PICKUP");
 		}
 		while (true) {
@@ -226,11 +244,12 @@ class Bot {
 					break;
 				}
 				if (possibilities.length() > 0) {
+					markAsSeen();
 					return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
 				}
 				possibleMoves++;
 			}
-			if (desire == 'E') {
+			if (desire == 'E') { // not sure about this whole part
 				desire = 'G';
 			}
 			else if (desire == 'G') {
@@ -243,22 +262,26 @@ class Bot {
 		while (true) {
 			double random = Math.random();
 			if (random < 0.25) {
-				if (Map.symbolAt(GameLogic.getCoords()[0]-1, GameLogic.getCoords()[1]) != '#') {
+				if (relSymbol(-1, 0) != '#') {
+					markAsSeen();
 					return sendCommand("MOVE N");
 				}
 			}
 			else if (random < 0.5) {
-				if (Map.symbolAt(GameLogic.getCoords()[0]+1, GameLogic.getCoords()[1]) != '#') {
+				if (relSymbol(1, 0) != '#') {
+					markAsSeen();
 					return sendCommand("MOVE S");
 				}
 			}
 			else if (random < 0.75) {
-				if (Map.symbolAt(GameLogic.getCoords()[0], GameLogic.getCoords()[1]+1) != '#') {
+				if (relSymbol(0, 1) != '#') {
+					markAsSeen();
 					return sendCommand("MOVE E");
 				}
 			}
 			else {
-				if (Map.symbolAt(GameLogic.getCoords()[0], GameLogic.getCoords()[1]-1) != '#') {
+				if (relSymbol(0, -1) != '#') {
+					markAsSeen();
 					return sendCommand("MOVE W");
 				}
 			}
@@ -268,6 +291,7 @@ class Bot {
 	public static void main(String[] args) throws Exception {
 		OutputHandler.clearScreen();
 		GameLogic.init();
+		initMap();
 		String[] inputOutput = {null, null};
 		while (true) {
 			updateDesire();
