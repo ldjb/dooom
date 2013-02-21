@@ -3,13 +3,13 @@ class Bot {
 	private static char desire = 'G';
 	private static char[][] mapData;
 
-	public static void markAsSeen() {
+	public static void markAsSeen() throws Exception {
 		if (relSymbol(0, 0) != 'E') {
 			mapData[GameLogic.getCoords()[0]][GameLogic.getCoords()[1]] = 'S';
 		}
 	}
 
-	public static void initMap() {
+	public static void initMap() throws Exception {
 		mapData = new char[Map.getSize()[0]][Map.getSize()[1]];
 		markAsSeen();
 	}
@@ -32,11 +32,12 @@ class Bot {
 		}
 	}
 
-	public static char relSymbol(int y, int x) {
+	public static char relSymbol(int y, int x) throws Exception {
 		if (GameLogic.getCoords()[0]+y < 0 | GameLogic.getCoords()[0]+y >= Map.getSize()[0] | GameLogic.getCoords()[1]+x < 0 | GameLogic.getCoords()[1]+x >= Map.getSize()[1]) {
 			return '#';
 		}
 		if (mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x] != '\u0000') {
+			//sendCommand("LOOK"); <-- sort this out
 			return mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x];
 		}
 		return Map.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
