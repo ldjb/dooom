@@ -2,6 +2,96 @@ class Bot {
 
 	private static char desire = 'G';
 	private static char[][] mapData;
+	private static int[][] lookReplyMapping = new int[21][3];
+	
+	/**TESTING**/
+	public static void printBotMap() {
+		int lineCounter = 0;
+		for (char[] line : mapData) {
+			int symbolCounter = 0;
+			for (char symbol : line) {
+				if (lineCounter == GameLogic.getCoords()[0] & symbolCounter == GameLogic.getCoords()[1]) {
+					OutputHandler.addToOutput('B');
+				}
+				else if (symbol == 'S') {
+					OutputHandler.addToOutput('.');
+				}
+				else if (symbol == '\u0000') {
+					OutputHandler.addToOutput(' ');
+				}
+				else {
+					OutputHandler.addToOutput(symbol);
+				}
+				symbolCounter++;
+			}
+			lineCounter++;
+			OutputHandler.addToOutput("\n");
+		}
+	}
+
+	private static void printScreen(String[] IOData) {
+		OutputHandler.addToOutput("DUNGEON OF DOOOM\n");
+		OutputHandler.addToOutput(GameLogic.getMapName() + " (" + Math.max(0, GameLogic.getWin() - GameLogic.getGold()) + ")\n\n");
+		printBotMap(); // GameLogic.printMap('B');
+		OutputHandler.addToOutput("\n");
+		if (IOData[0] != null) {
+			OutputHandler.addToOutput("> " + IOData[0] + "\n");
+			OutputHandler.addToOutput(IOData[1] + "\n");
+			if (IOData[1].length() != 39) {
+				OutputHandler.addToOutput("\n\n\n\n\n");
+			}
+			OutputHandler.printOutput();
+			if (IOData[0].toUpperCase().equals("QUIT") | IOData[1].startsWith("Congrat")) {
+				System.exit(0);
+			}
+		}
+		else {
+			OutputHandler.addToOutput("\n\n\n\n\n\n\n");
+		}
+	}
+	
+	private static void lookReplyMappingArrayAssigner(int index, int charAt, int row, int col) {
+		lookReplyMapping[index][0] = charAt;
+		lookReplyMapping[index][1] = row;
+		lookReplyMapping[index][2] = col;
+	}
+	
+	private static void constructLookReplyMappingArray() {
+		lookReplyMappingArrayAssigner(0, 11, -2, -1);
+		lookReplyMappingArrayAssigner(1, 12, -2, 0);
+		lookReplyMappingArrayAssigner(2, 13, -2, 1);
+		lookReplyMappingArrayAssigner(3, 16, -1, -2);
+		lookReplyMappingArrayAssigner(4, 17, -1, -1);
+		lookReplyMappingArrayAssigner(5, 18, -1, 0);
+		lookReplyMappingArrayAssigner(6, 19, -1, 1);
+		lookReplyMappingArrayAssigner(7, 20, -1, 2);
+		lookReplyMappingArrayAssigner(8, 22, 0, -2);
+		lookReplyMappingArrayAssigner(9, 23, 0, -1);
+		lookReplyMappingArrayAssigner(10, 24, 0, 0);
+		lookReplyMappingArrayAssigner(11, 25, 0, 1);
+		lookReplyMappingArrayAssigner(12, 26, 0, 2);
+		lookReplyMappingArrayAssigner(13, 28, 1, -2);
+		lookReplyMappingArrayAssigner(14, 29, 1, -1);
+		lookReplyMappingArrayAssigner(15, 30, 1, 0);
+		lookReplyMappingArrayAssigner(16, 31, 1, 1);
+		lookReplyMappingArrayAssigner(17, 32, 1, 2);
+		lookReplyMappingArrayAssigner(18, 35, 2, -1);
+		lookReplyMappingArrayAssigner(19, 36, 2, 0);
+		lookReplyMappingArrayAssigner(20, 37, 2, 1);
+	}
+
+	private static void look() throws Exception {
+		String[] response = sendCommand("LOOK");
+		String lookReply = response[1];
+		for (int[] mapping : lookReplyMapping) {
+			if (!(GameLogic.getCoords()[0]+mapping[1] < 0 | GameLogic.getCoords()[0]+mapping[1] >= Map.getSize()[0] | GameLogic.getCoords()[1]+mapping[2] < 0 | GameLogic.getCoords()[1]+mapping[2] >= Map.getSize()[1])) {
+				if (mapData[GameLogic.getCoords()[0] + mapping[1]][GameLogic.getCoords()[1] + mapping[2]] != 'S') {
+					mapData[GameLogic.getCoords()[0] + mapping[1]][GameLogic.getCoords()[1] + mapping[2]] = lookReply.charAt(mapping[0]);
+				}
+			}
+		}
+		printScreen(response);
+	}
 
 	public static void markAsSeen() throws Exception {
 		if (relSymbol(0, 0) != 'E') {
@@ -11,7 +101,7 @@ class Bot {
 
 	public static void initMap() throws Exception {
 		mapData = new char[Map.getSize()[0]][Map.getSize()[1]];
-		markAsSeen();
+		//markAsSeen();
 	}
 
 	public static String[] sendCommand(String command) throws Exception {
@@ -40,11 +130,13 @@ class Bot {
 			//sendCommand("LOOK"); <-- sort this out
 			return mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x];
 		}
+		look();
 		return Map.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
 	}
 
 	public static String[] nextCommand() throws Exception {
 		if (relSymbol(0, 0) == desire) {
+			mapData[GameLogic.getCoords()[0]][GameLogic.getCoords()[1]] = '.';
 			return sendCommand("PICKUP");
 		}
 		while (true) {
@@ -293,24 +385,11 @@ class Bot {
 		OutputHandler.clearScreen();
 		GameLogic.init();
 		initMap();
+		constructLookReplyMappingArray();
 		String[] inputOutput = {null, null};
 		while (true) {
 			updateDesire();
-			OutputHandler.addToOutput("DUNGEON OF DOOOM\n");
-			OutputHandler.addToOutput(GameLogic.getMapName() + " (" + Math.max(0, GameLogic.getWin() - GameLogic.getGold()) + ")\n\n");
-			GameLogic.printMap('B');
-			OutputHandler.addToOutput("\n");
-			if (inputOutput[0] != null) {
-				OutputHandler.addToOutput("> " + inputOutput[0] + "\n");
-				OutputHandler.addToOutput(inputOutput[1] + "\n");
-				OutputHandler.printOutput();
-				if (inputOutput[0].toUpperCase().equals("QUIT") | inputOutput[1].startsWith("Congrat")) {
-					System.exit(0);
-				}
-			}
-			else {
-				OutputHandler.addToOutput("\n\n");
-			}
+			printScreen(inputOutput);
 			inputOutput = nextCommand();
 		}
 	}
