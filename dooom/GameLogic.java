@@ -122,6 +122,10 @@ class GameLogic {
 		Map.print(playerSymbol, playerCoords[0], playerCoords[1]);
 	}
 
+	public static int[] getCoords() {
+		return playerCoords;
+	}
+
 	public static void init() throws Exception {
 		Map.load();
 		spawnPlayer();

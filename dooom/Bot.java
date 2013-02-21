@@ -21,11 +21,11 @@ class Bot {
 	}
 
 	public static char relSymbol(int y, int x) {
-		return Map.symbolAt(GameLogic.playerCoords[0]+y, GameLogic.playerCoords[1]+x);
+		return Map.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
 	}
 
 	public static String[] nextCommand() throws Exception {
-		if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]) == desire) {
+		if (Map.symbolAt(GameLogic.getCoords()[0], GameLogic.getCoords()[1]) == desire) {
 			return sendCommand("PICKUP");
 		}
 		while (true) {
@@ -243,22 +243,22 @@ class Bot {
 		while (true) {
 			double random = Math.random();
 			if (random < 0.25) {
-				if (Map.symbolAt(GameLogic.playerCoords[0]-1, GameLogic.playerCoords[1]) != '#') {
+				if (Map.symbolAt(GameLogic.getCoords()[0]-1, GameLogic.getCoords()[1]) != '#') {
 					return sendCommand("MOVE N");
 				}
 			}
 			else if (random < 0.5) {
-				if (Map.symbolAt(GameLogic.playerCoords[0]+1, GameLogic.playerCoords[1]) != '#') {
+				if (Map.symbolAt(GameLogic.getCoords()[0]+1, GameLogic.getCoords()[1]) != '#') {
 					return sendCommand("MOVE S");
 				}
 			}
 			else if (random < 0.75) {
-				if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]+1) != '#') {
+				if (Map.symbolAt(GameLogic.getCoords()[0], GameLogic.getCoords()[1]+1) != '#') {
 					return sendCommand("MOVE E");
 				}
 			}
 			else {
-				if (Map.symbolAt(GameLogic.playerCoords[0], GameLogic.playerCoords[1]-1) != '#') {
+				if (Map.symbolAt(GameLogic.getCoords()[0], GameLogic.getCoords()[1]-1) != '#') {
 					return sendCommand("MOVE W");
 				}
 			}
