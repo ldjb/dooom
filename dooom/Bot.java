@@ -352,33 +352,21 @@ class Bot {
 				break;
 			}
 		}
-		while (true) {
-			double random = Math.random();
-			if (random < 0.25) {
-				if (relSymbol(-1, 0) != '#') {
-					markAsSeen();
-					return sendCommand("MOVE N");
-				}
-			}
-			else if (random < 0.5) {
-				if (relSymbol(1, 0) != '#') {
-					markAsSeen();
-					return sendCommand("MOVE S");
-				}
-			}
-			else if (random < 0.75) {
-				if (relSymbol(0, 1) != '#') {
-					markAsSeen();
-					return sendCommand("MOVE E");
-				}
-			}
-			else {
-				if (relSymbol(0, -1) != '#') {
-					markAsSeen();
-					return sendCommand("MOVE W");
-				}
-			}
+		String possibilities = "";
+		if (relSymbol(-1, 0) != '#') {
+			possibilities += "N";
 		}
+		if (relSymbol(1, 0) != '#') {
+			possibilities += "S";
+		}
+		if (relSymbol(0, 1) != '#') {
+			possibilities += "E";
+		}
+		if (relSymbol(0, -1) != '#') {
+			possibilities += "W";
+		}
+		markAsSeen();
+		return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
 	}
 
 	public static void main(String[] args) throws Exception {
