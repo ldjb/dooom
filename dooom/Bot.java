@@ -3,6 +3,7 @@ class Bot {
 	private static char desire = 'G';
 	private static char[][] mapData;
 	private static int[][] lookReplyMapping = new int[21][3];
+	private static char direction;
 	
 	/**TESTING**/
 	public static void printBotMap() {
@@ -365,6 +366,28 @@ class Bot {
 		if (relSymbol(0, -1) != '#') {
 			possibilities += "W";
 		}
+		
+		if (direction == 'N') {
+			if (possibilities.replaceAll("S", "").length() > 0) {
+				possibilities = possibilities.replaceAll("S", "");
+			}
+		}
+		else if (direction == 'S') {
+			if (possibilities.replaceAll("N", "").length() > 0) {
+				possibilities = possibilities.replaceAll("N", "");
+			}
+		}
+		else if (direction == 'E') {
+			if (possibilities.replaceAll("W", "").length() > 0) {
+				possibilities = possibilities.replaceAll("W", "");
+			}
+		}
+		else if (direction == 'W') {
+			if (possibilities.replaceAll("E", "").length() > 0) {
+				possibilities = possibilities.replaceAll("E", "");
+			}
+		}
+		
 		markAsSeen();
 		return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
 	}
@@ -377,6 +400,9 @@ class Bot {
 		String[] inputOutput = {null, null};
 		while (true) {
 			updateDesire();
+			if (inputOutput[0] != null && inputOutput[0].startsWith("MOVE ")) { //do this properly later
+				direction = inputOutput[0].charAt(5);
+			}
 			printScreen(inputOutput);
 			inputOutput = nextCommand();
 		}
