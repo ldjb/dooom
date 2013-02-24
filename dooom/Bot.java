@@ -114,6 +114,12 @@ class Bot {
 		return returnArray;
 	}
 	
+	public static String[] move(char inDir) throws Exception {
+		markAsSeen();
+		direction = inDir;
+		return sendCommand("MOVE " + Character.toString(inDir));
+	}
+	
 	public static void updateDesire() {
 		if (GameLogic.getGold() < GameLogic.getWin()) {
 			desire = 'G';
@@ -338,8 +344,7 @@ class Bot {
 					break;
 				}
 				if (possibilities.length() > 0) {
-					markAsSeen();
-					return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
+					return move(possibilities.charAt((int) (Math.random() * possibilities.length())));
 				}
 				possibleMoves++;
 			}
@@ -388,8 +393,7 @@ class Bot {
 			}
 		}
 		
-		markAsSeen();
-		return sendCommand("MOVE " + possibilities.charAt((int) (Math.random() * possibilities.length())));
+		return move(possibilities.charAt((int) (Math.random() * possibilities.length())));
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -400,9 +404,6 @@ class Bot {
 		String[] inputOutput = {null, null};
 		while (true) {
 			updateDesire();
-			if (inputOutput[0] != null && inputOutput[0].startsWith("MOVE ")) { //do this properly later
-				direction = inputOutput[0].charAt(5);
-			}
 			printScreen(inputOutput);
 			inputOutput = nextCommand();
 		}
