@@ -5,7 +5,6 @@ class Bot {
 	private static int[][] lookReplyMapping = new int[21][3];
 	private static char direction;
 	
-	/**TESTING**/
 	public static void printBotMap() {
 		int lineCounter = 0;
 		for (char[] line : mapData) {
@@ -102,7 +101,6 @@ class Bot {
 
 	public static void initMap() throws Exception {
 		mapData = new char[GameLogic.getMapSize()[0]][GameLogic.getMapSize()[1]];
-		//markAsSeen();
 	}
 
 	public static String[] sendCommand(String command) throws Exception {
@@ -134,7 +132,6 @@ class Bot {
 			return '#';
 		}
 		if (mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x] != '\u0000') {
-			//sendCommand("LOOK"); <-- sort this out
 			return mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x];
 		}
 		look();
