@@ -77,28 +77,36 @@ class Map {
 		}
 	}
 	
-	public static void load() throws Exception {
+	public static void load() {
 		String mapName = selectMap();
 		determineMapSize(mapName);
 		mapData = new char[mapSize[0]][mapSize[1]];
-		BufferedReader in = new BufferedReader(new FileReader(mapName));
-		String line;
-		int mapLineCounter = 0;
-		while ((line = in.readLine()) != null) {
-			if (line.startsWith("name ")) {
-				name = line.substring(5);
-			}
-			else if (line.startsWith("win ")) {
-				win = Integer.parseInt(line.substring(4));
-			}
-			else if (line.length() != 0) {
-				int lineSymbolCounter = 0;
-				for (char symbol : line.toCharArray()) {
-					mapData[mapLineCounter][lineSymbolCounter] = symbol;
-					lineSymbolCounter++;
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(mapName));
+			String line;
+			int mapLineCounter = 0;
+			while ((line = in.readLine()) != null) {
+				if (line.startsWith("name ")) {
+					name = line.substring(5);
 				}
-				mapLineCounter++;
+				else if (line.startsWith("win ")) {
+					win = Integer.parseInt(line.substring(4));
+				}
+				else if (line.length() != 0) {
+					int lineSymbolCounter = 0;
+					for (char symbol : line.toCharArray()) {
+						mapData[mapLineCounter][lineSymbolCounter] = symbol;
+						lineSymbolCounter++;
+					}
+					mapLineCounter++;
+				}
 			}
+		}
+		catch (FileNotFoundException e) {
+			System.err.println("Error: File not found. " + e);
+		}
+		catch (IOException e) {
+			System.err.println("Error: Could not read input. " + e);
 		}
 	}
 	
