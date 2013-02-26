@@ -7,7 +7,7 @@ class Map {
 	private static int[] mapSize = new int[2];
 	private static char[][] mapData;
 
-	private static String selectMap() throws Exception {
+	private static String selectMap() {
 		int fileCount;
 		Integer fileNumber;
 		String[] filteredFileList;
@@ -38,7 +38,13 @@ class Map {
 			}
 			OutputHandler.printOutput();
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-			input = in.readLine();
+			try {
+				input = in.readLine();
+			}
+			catch (IOException e) {
+				System.err.println("Error: Could not read input. " + e);
+				System.exit(-1);
+			}
 			OutputHandler.clearScreen();
 			try {
 				fileNumber = Integer.parseInt(input) - 1;
