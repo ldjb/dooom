@@ -2,7 +2,7 @@ import java.io.*;
 
 class PlayGame {
 
-	public static String[] promptUser() throws Exception {
+	private static String[] promptUser() throws Exception {
 		OutputHandler.addToOutput("> ");
 		OutputHandler.printOutput();
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
