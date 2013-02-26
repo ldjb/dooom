@@ -5,7 +5,7 @@ class Bot {
 	private static int[][] lookReplyMapping = new int[21][3];
 	private static char direction;
 	
-	public static void printBotMap() {
+	private static void printBotMap() {
 		int lineCounter = 0;
 		for (char[] line : mapData) {
 			int symbolCounter = 0;
@@ -93,17 +93,17 @@ class Bot {
 		printScreen(response);
 	}
 
-	public static void markAsSeen() throws Exception {
+	private static void markAsSeen() throws Exception {
 		if (relSymbol(0, 0) != 'E') {
 			mapData[GameLogic.getCoords()[0]][GameLogic.getCoords()[1]] = 'S';
 		}
 	}
 
-	public static void initMap() throws Exception {
+	private static void initMap() throws Exception {
 		mapData = new char[GameLogic.getMapSize()[0]][GameLogic.getMapSize()[1]];
 	}
 
-	public static String[] sendCommand(String command) throws Exception {
+	private static String[] sendCommand(String command) throws Exception {
 		OutputHandler.addToOutput("> " + command);
 		OutputHandler.printOutput();
 		System.in.read();
@@ -112,13 +112,13 @@ class Bot {
 		return returnArray;
 	}
 	
-	public static String[] move(char inDir) throws Exception {
+	private static String[] move(char inDir) throws Exception {
 		markAsSeen();
 		direction = inDir;
 		return sendCommand("MOVE " + Character.toString(inDir));
 	}
 	
-	public static void updateDesire() {
+	private static void updateDesire() {
 		if (GameLogic.getGold() < GameLogic.getWin()) {
 			desire = 'G';
 		}
@@ -127,7 +127,7 @@ class Bot {
 		}
 	}
 
-	public static char relSymbol(int y, int x) throws Exception {
+	private static char relSymbol(int y, int x) throws Exception {
 		if (GameLogic.getCoords()[0]+y < 0 | GameLogic.getCoords()[0]+y >= GameLogic.getMapSize()[0] | GameLogic.getCoords()[1]+x < 0 | GameLogic.getCoords()[1]+x >= GameLogic.getMapSize()[1]) {
 			return '#';
 		}
@@ -138,7 +138,7 @@ class Bot {
 		return GameLogic.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
 	}
 
-	public static String[] nextCommand() throws Exception {
+	private static String[] nextCommand() throws Exception {
 		if (relSymbol(0, 0) == desire) {
 			mapData[GameLogic.getCoords()[0]][GameLogic.getCoords()[1]] = '.';
 			return sendCommand("PICKUP");
