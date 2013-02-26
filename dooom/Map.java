@@ -58,14 +58,22 @@ class Map {
 		return "maps/" + filteredFileList[fileNumber];
 	}
 	
-	private static void determineMapSize(String mapName) throws Exception {
-		BufferedReader in = new BufferedReader(new FileReader(mapName));
-		String line;
-		while ((line = in.readLine()) != null) {
-			if (!line.startsWith("name ") & !line.startsWith("win ") & line.length() != 0) {
-				mapSize[0]++;
-				mapSize[1] = line.trim().length();
+	private static void determineMapSize(String mapName) {
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(mapName));
+			String line;
+			while ((line = in.readLine()) != null) {
+				if (!line.startsWith("name ") & !line.startsWith("win ") & line.length() != 0) {
+					mapSize[0]++;
+					mapSize[1] = line.trim().length();
+				}
 			}
+		}
+		catch (FileNotFoundException e) {
+			System.err.println("Error: File not found. " + e);
+		}
+		catch (IOException e) {
+			System.err.println("Error: Could not read input. " + e);
 		}
 	}
 	
