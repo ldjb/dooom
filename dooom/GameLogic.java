@@ -133,7 +133,7 @@ class GameLogic {
 		return playerCoords;
 	}
 
-	public static void init() throws Exception {
+	public static void init() {
 		Map.load();
 		spawnPlayer();
 	}
