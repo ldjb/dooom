@@ -33,7 +33,7 @@ class Bot {
 	private static void printScreen(String[] IOData) {
 		OutputHandler.addToOutput("DUNGEON OF DOOOM\n");
 		OutputHandler.addToOutput(GameLogic.getMapName() + " (" + Math.max(0, GameLogic.getWin() - GameLogic.getGold()) + ")\n\n");
-		printBotMap(); // GameLogic.printMap('B');
+		printBotMap(); // GameLogic.printMap('B'); // allow switching between
 		OutputHandler.addToOutput("\n");
 		if (IOData[0] != null) {
 			OutputHandler.addToOutput("> " + IOData[0] + "\n");
