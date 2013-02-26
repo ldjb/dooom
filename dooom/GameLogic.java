@@ -2,7 +2,7 @@ import java.io.*;
 
 class GameLogic {
 	
-	public static int[] playerCoords = new int[2]; // this should be private in final build
+	private static int[] playerCoords = new int[2];
 	private static int gold = 0;
 	
 	public static int[] getMapSize() {
@@ -22,7 +22,7 @@ class GameLogic {
 		}
 	}
 
-	public static String movePlayer(char direction) {
+	private static String movePlayer(char direction) {
 		String returnValue = "FAIL";
 		switch (direction) {
 			case 'N':	if (symbolAt(playerCoords[0] - 1, playerCoords[1]) != '#') {
