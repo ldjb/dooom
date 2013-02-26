@@ -85,7 +85,7 @@ class Bot {
 		String[] response = sendCommand("LOOK");
 		String lookReply = response[1];
 		for (int[] mapping : lookReplyMapping) {
-			if (!(GameLogic.getCoords()[0]+mapping[1] < 0 | GameLogic.getCoords()[0]+mapping[1] >= Map.getSize()[0] | GameLogic.getCoords()[1]+mapping[2] < 0 | GameLogic.getCoords()[1]+mapping[2] >= Map.getSize()[1])) {
+			if (!(GameLogic.getCoords()[0]+mapping[1] < 0 | GameLogic.getCoords()[0]+mapping[1] >= GameLogic.getMapSize()[0] | GameLogic.getCoords()[1]+mapping[2] < 0 | GameLogic.getCoords()[1]+mapping[2] >= GameLogic.getMapSize()[1])) {
 				if (mapData[GameLogic.getCoords()[0] + mapping[1]][GameLogic.getCoords()[1] + mapping[2]] != 'S') {
 					mapData[GameLogic.getCoords()[0] + mapping[1]][GameLogic.getCoords()[1] + mapping[2]] = lookReply.charAt(mapping[0]);
 				}
@@ -101,7 +101,7 @@ class Bot {
 	}
 
 	public static void initMap() throws Exception {
-		mapData = new char[Map.getSize()[0]][Map.getSize()[1]];
+		mapData = new char[GameLogic.getMapSize()[0]][GameLogic.getMapSize()[1]];
 		//markAsSeen();
 	}
 
@@ -130,7 +130,7 @@ class Bot {
 	}
 
 	public static char relSymbol(int y, int x) throws Exception {
-		if (GameLogic.getCoords()[0]+y < 0 | GameLogic.getCoords()[0]+y >= Map.getSize()[0] | GameLogic.getCoords()[1]+x < 0 | GameLogic.getCoords()[1]+x >= Map.getSize()[1]) {
+		if (GameLogic.getCoords()[0]+y < 0 | GameLogic.getCoords()[0]+y >= GameLogic.getMapSize()[0] | GameLogic.getCoords()[1]+x < 0 | GameLogic.getCoords()[1]+x >= GameLogic.getMapSize()[1]) {
 			return '#';
 		}
 		if (mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x] != '\u0000') {
@@ -138,7 +138,7 @@ class Bot {
 			return mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x];
 		}
 		look();
-		return Map.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
+		return GameLogic.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
 	}
 
 	public static String[] nextCommand() throws Exception {

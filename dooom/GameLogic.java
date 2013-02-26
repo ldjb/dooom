@@ -5,11 +5,19 @@ class GameLogic {
 	public static int[] playerCoords = new int[2]; // this should be private in final build
 	private static int gold = 0;
 	
+	public static int[] getMapSize() {
+		return Map.getSize();
+	}
+	
+	public static char symbolAt(int row, int col) {
+		return Map.symbolAt(row, col);
+	}
+	
 	private static void spawnPlayer() {
-		int[] mapSize = Map.getSize();
+		int[] mapSize = getMapSize();
 		playerCoords[0] = (int) (Math.random() * (mapSize[0]));
 		playerCoords[1] = (int) (Math.random() * (mapSize[1]));
-		if (Map.symbolAt(playerCoords[0], playerCoords[1]) == '#') {
+		if (symbolAt(playerCoords[0], playerCoords[1]) == '#') {
 			spawnPlayer();
 		}
 	}
@@ -17,28 +25,28 @@ class GameLogic {
 	public static String movePlayer(char direction) {
 		String returnValue = "FAIL";
 		switch (direction) {
-			case 'N':	if (Map.symbolAt(playerCoords[0] - 1, playerCoords[1]) != '#') {
+			case 'N':	if (symbolAt(playerCoords[0] - 1, playerCoords[1]) != '#') {
 							playerCoords[0]--;
 							returnValue = "SUCCESS";
 						}
 						break;
-			case 'S':	if (Map.symbolAt(playerCoords[0] + 1, playerCoords[1]) != '#') {
+			case 'S':	if (symbolAt(playerCoords[0] + 1, playerCoords[1]) != '#') {
 							playerCoords[0]++;
 							returnValue = "SUCCESS";
 						}
 						break;
-			case 'E':	if (Map.symbolAt(playerCoords[0], playerCoords[1] + 1) != '#') {
+			case 'E':	if (symbolAt(playerCoords[0], playerCoords[1] + 1) != '#') {
 							playerCoords[1]++;
 							returnValue = "SUCCESS";
 						}
 						break;
-			case 'W':	if (Map.symbolAt(playerCoords[0], playerCoords[1] -1) != '#') {
+			case 'W':	if (symbolAt(playerCoords[0], playerCoords[1] -1) != '#') {
 							playerCoords[1]--;
 							returnValue = "SUCCESS";
 						}
 						break;
 		}
-		if (gold >= Map.getWin() & Map.symbolAt(playerCoords[0], playerCoords[1]) == 'E') {
+		if (gold >= Map.getWin() & symbolAt(playerCoords[0], playerCoords[1]) == 'E') {
 			return "Congratulations, you win!";
 		}
 		return returnValue;
@@ -52,7 +60,7 @@ class GameLogic {
 			return movePlayer(command.toUpperCase().charAt(5));
 		}
 		else if (command.toUpperCase().equals("PICKUP")) {
-			if (Map.symbolAt(playerCoords[0], playerCoords[1]) == 'G') {
+			if (symbolAt(playerCoords[0], playerCoords[1]) == 'G') {
 				Map.setSymbol(playerCoords[0], playerCoords[1], '.');
 				gold++;
 				return "SUCCESS, GOLD COINS: " + gold;
@@ -64,31 +72,31 @@ class GameLogic {
 		else if (command.toUpperCase().equals("LOOK")) {
 			return "LOOKREPLY\n"
 				 + "X"
-				 + Character.toString(Map.symbolAt(playerCoords[0]-2, playerCoords[1]-1))
-				 + Character.toString(Map.symbolAt(playerCoords[0]-2, playerCoords[1]))
-				 + Character.toString(Map.symbolAt(playerCoords[0]-2, playerCoords[1]+1))
+				 + Character.toString(symbolAt(playerCoords[0]-2, playerCoords[1]-1))
+				 + Character.toString(symbolAt(playerCoords[0]-2, playerCoords[1]))
+				 + Character.toString(symbolAt(playerCoords[0]-2, playerCoords[1]+1))
 				 + "X\n"
-				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]-2))
-				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]-1))
-				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]))
-				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]+1))
-				 + Character.toString(Map.symbolAt(playerCoords[0]-1, playerCoords[1]+2))
+				 + Character.toString(symbolAt(playerCoords[0]-1, playerCoords[1]-2))
+				 + Character.toString(symbolAt(playerCoords[0]-1, playerCoords[1]-1))
+				 + Character.toString(symbolAt(playerCoords[0]-1, playerCoords[1]))
+				 + Character.toString(symbolAt(playerCoords[0]-1, playerCoords[1]+1))
+				 + Character.toString(symbolAt(playerCoords[0]-1, playerCoords[1]+2))
 				 + "\n"
-				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]-2))
-				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]-1))
-				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]))
-				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]+1))
-				 + Character.toString(Map.symbolAt(playerCoords[0], playerCoords[1]+2))
+				 + Character.toString(symbolAt(playerCoords[0], playerCoords[1]-2))
+				 + Character.toString(symbolAt(playerCoords[0], playerCoords[1]-1))
+				 + Character.toString(symbolAt(playerCoords[0], playerCoords[1]))
+				 + Character.toString(symbolAt(playerCoords[0], playerCoords[1]+1))
+				 + Character.toString(symbolAt(playerCoords[0], playerCoords[1]+2))
 				 + "\n"
-				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]-2))
-				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]-1))
-				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]))
-				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]+1))
-				 + Character.toString(Map.symbolAt(playerCoords[0]+1, playerCoords[1]+2))
+				 + Character.toString(symbolAt(playerCoords[0]+1, playerCoords[1]-2))
+				 + Character.toString(symbolAt(playerCoords[0]+1, playerCoords[1]-1))
+				 + Character.toString(symbolAt(playerCoords[0]+1, playerCoords[1]))
+				 + Character.toString(symbolAt(playerCoords[0]+1, playerCoords[1]+1))
+				 + Character.toString(symbolAt(playerCoords[0]+1, playerCoords[1]+2))
 				 + "\nX"
-				 + Character.toString(Map.symbolAt(playerCoords[0]+2, playerCoords[1]-1))
-				 + Character.toString(Map.symbolAt(playerCoords[0]+2, playerCoords[1]))
-				 + Character.toString(Map.symbolAt(playerCoords[0]+2, playerCoords[1]+1))
+				 + Character.toString(symbolAt(playerCoords[0]+2, playerCoords[1]-1))
+				 + Character.toString(symbolAt(playerCoords[0]+2, playerCoords[1]))
+				 + Character.toString(symbolAt(playerCoords[0]+2, playerCoords[1]+1))
 				 + "X";
 		}
 		else if (command.toUpperCase().equals("QUIT")) {
