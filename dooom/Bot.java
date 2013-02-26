@@ -4,6 +4,19 @@ class Bot {
 	private static char[][] mapData;
 	private static int[][] lookReplyMapping = new int[21][3];
 	private static char direction;
+	private static int unrestrictedView = 0;
+	private static int skipInput = 0;
+	
+	private static void setModes(String[] args) {
+		for (String arg : args) {
+			if (arg.equals("-u")) {
+				unrestrictedView = 1;
+			}
+			else if (arg.equals("-s")) {
+				skipInput = 1;
+			}
+		}
+	}
 	
 	private static void printBotMap() {
 		int lineCounter = 0;
@@ -32,7 +45,12 @@ class Bot {
 	private static void printScreen(String[] IOData) {
 		OutputHandler.addToOutput("DUNGEON OF DOOOM\n");
 		OutputHandler.addToOutput(GameLogic.getMapName() + " (" + Math.max(0, GameLogic.getWin() - GameLogic.getGold()) + ")\n\n");
-		printBotMap(); // GameLogic.printMap('B'); // allow switching between
+		if (unrestrictedView == 0) {
+			printBotMap();
+		}
+		else {
+			GameLogic.printMap('B');
+		}
 		OutputHandler.addToOutput("\n");
 		if (IOData[0] != null) {
 			OutputHandler.addToOutput("> " + IOData[0] + "\n");
@@ -106,7 +124,9 @@ class Bot {
 	private static String[] sendCommand(String command) throws Exception {
 		OutputHandler.addToOutput("> " + command);
 		OutputHandler.printOutput();
-		System.in.read();
+		if (skipInput == 0) {
+			System.in.read();
+		}
 		OutputHandler.clearScreen();
 		String[] returnArray = {command, GameLogic.processCommand(command)};
 		return returnArray;
@@ -394,6 +414,7 @@ class Bot {
 	}
 
 	public static void main(String[] args) throws Exception {
+		setModes(args);
 		OutputHandler.clearScreen();
 		GameLogic.init();
 		initMap();
