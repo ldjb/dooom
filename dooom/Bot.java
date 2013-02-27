@@ -75,27 +75,27 @@ class Bot {
 	}
 	
 	private static void constructLookReplyMappingArray() {
-		lookReplyMappingArrayAssigner(0, 11, -2, -1);
-		lookReplyMappingArrayAssigner(1, 12, -2, 0);
-		lookReplyMappingArrayAssigner(2, 13, -2, 1);
-		lookReplyMappingArrayAssigner(3, 16, -1, -2);
-		lookReplyMappingArrayAssigner(4, 17, -1, -1);
-		lookReplyMappingArrayAssigner(5, 18, -1, 0);
-		lookReplyMappingArrayAssigner(6, 19, -1, 1);
-		lookReplyMappingArrayAssigner(7, 20, -1, 2);
-		lookReplyMappingArrayAssigner(8, 22, 0, -2);
-		lookReplyMappingArrayAssigner(9, 23, 0, -1);
-		lookReplyMappingArrayAssigner(10, 24, 0, 0);
-		lookReplyMappingArrayAssigner(11, 25, 0, 1);
-		lookReplyMappingArrayAssigner(12, 26, 0, 2);
-		lookReplyMappingArrayAssigner(13, 28, 1, -2);
-		lookReplyMappingArrayAssigner(14, 29, 1, -1);
-		lookReplyMappingArrayAssigner(15, 30, 1, 0);
-		lookReplyMappingArrayAssigner(16, 31, 1, 1);
-		lookReplyMappingArrayAssigner(17, 32, 1, 2);
-		lookReplyMappingArrayAssigner(18, 35, 2, -1);
-		lookReplyMappingArrayAssigner(19, 36, 2, 0);
-		lookReplyMappingArrayAssigner(20, 37, 2, 1);
+		lookReplyMappingArrayAssigner( 0, 11, -2, -1);
+		lookReplyMappingArrayAssigner( 1, 12, -2,  0);
+		lookReplyMappingArrayAssigner( 2, 13, -2,  1);
+		lookReplyMappingArrayAssigner( 3, 16, -1, -2);
+		lookReplyMappingArrayAssigner( 4, 17, -1, -1);
+		lookReplyMappingArrayAssigner( 5, 18, -1,  0);
+		lookReplyMappingArrayAssigner( 6, 19, -1,  1);
+		lookReplyMappingArrayAssigner( 7, 20, -1,  2);
+		lookReplyMappingArrayAssigner( 8, 22,  0, -2);
+		lookReplyMappingArrayAssigner( 9, 23,  0, -1);
+		lookReplyMappingArrayAssigner(10, 24,  0,  0);
+		lookReplyMappingArrayAssigner(11, 25,  0,  1);
+		lookReplyMappingArrayAssigner(12, 26,  0,  2);
+		lookReplyMappingArrayAssigner(13, 28,  1, -2);
+		lookReplyMappingArrayAssigner(14, 29,  1, -1);
+		lookReplyMappingArrayAssigner(15, 30,  1,  0);
+		lookReplyMappingArrayAssigner(16, 31,  1,  1);
+		lookReplyMappingArrayAssigner(17, 32,  1,  2);
+		lookReplyMappingArrayAssigner(18, 35,  2, -1);
+		lookReplyMappingArrayAssigner(19, 36,  2,  0);
+		lookReplyMappingArrayAssigner(20, 37,  2,  1);
 	}
 
 	private static void look() throws Exception {

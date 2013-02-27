@@ -3,7 +3,7 @@ import java.io.*;
 class Map {
 
 	private static String name;
-	private static int win;
+	private static int win = -1;
 	private static int[] mapSize = new int[2];
 	private static char[][] mapData;
 
@@ -90,23 +90,48 @@ class Map {
 					name = line.substring(5);
 				}
 				else if (line.startsWith("win ")) {
-					win = Integer.parseInt(line.substring(4));
+					try {
+						win = Integer.parseInt(line.substring(4));
+					}
+					catch (NumberFormatException e) {
+						System.err.println("Error: Invalid map. Invalid win value.");
+						System.exit(-1);
+					}
 				}
-				else if (line.length() != 0) {
+				else if (line.length() == mapSize[1]) {
 					int lineSymbolCounter = 0;
 					for (char symbol : line.toCharArray()) {
-						mapData[mapLineCounter][lineSymbolCounter] = symbol;
+						if (symbol == '.' || symbol == '#' || symbol == 'G' || symbol == 'E') {
+							mapData[mapLineCounter][lineSymbolCounter] = symbol;
+						}
+						else {
+							System.err.println("Error: Invalid map.");
+							System.exit(-1);
+						}
 						lineSymbolCounter++;
 					}
 					mapLineCounter++;
+				}
+				else if (!line.trim().isEmpty()){
+					System.err.println("Error: Invalid map.");
+					System.exit(-1);
 				}
 			}
 		}
 		catch (FileNotFoundException e) {
 			System.err.println("Error: File not found. " + e);
+			System.exit(-1);
 		}
 		catch (IOException e) {
 			System.err.println("Error: Could not read input. " + e);
+			System.exit(-1);
+		}
+		if (name == null) {
+			name = "Untitled map";
+		}
+		if (win < 0) {
+			System.err.println("Error: Invalid map. Invalid win value.");
+			System.exit(-1);
 		}
 	}
 	
