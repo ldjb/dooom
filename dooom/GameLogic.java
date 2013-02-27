@@ -13,6 +13,33 @@ class GameLogic {
 		return Map.symbolAt(row, col);
 	}
 	
+	private static void validateMap() {
+		int errorFlag = 0;
+		int goldCounter = 0;
+		int exitCounter = 0;
+		for (int i=0 ; i < getMapSize()[0] ; i++) {
+			for (int j=0 ; j < getMapSize()[1] ; j++) {
+				if (symbolAt(i, j) == 'G') {
+					goldCounter++;
+				}
+				else if (symbolAt(i, j) == 'E') {
+					exitCounter++;
+				}
+			}
+		}
+		if (goldCounter < Map.getWin()) {
+			System.err.println("Error: Invalid map. Not enough gold to win.");
+			errorFlag = 1;
+		}
+		if (exitCounter == 0) {
+			System.err.println("Error: Invalid map. There are no exits.");
+			errorFlag = 1;
+		}
+		if (errorFlag != 0) {
+			System.exit(-1);
+		}
+	}
+	
 	private static void spawnPlayer() {
 		int[] mapSize = getMapSize();
 		playerCoords[0] = (int) (Math.random() * (mapSize[0]));
@@ -135,6 +162,7 @@ class GameLogic {
 
 	public static void init() {
 		Map.load();
+		validateMap();
 		spawnPlayer();
 	}
 
