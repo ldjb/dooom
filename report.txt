@@ -1,0 +1,9 @@
+DUNGEON OF DOOOM -- Report
+By Leon Byford
+
+As was suggested in the coursework specification, I broke the program up into four classes:
+* Map
+* GameLogic
+* PlayGame
+* Bot
+There is an additional class, OutputHandler, which will be discussed later.
