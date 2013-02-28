@@ -2,10 +2,10 @@ import java.io.*;
 
 class Map {
 
-	private static String name;
-	private static int win = -1;
-	private static int[] mapSize = new int[2];
-	private static char[][] mapData;
+	private static String name; // name of map
+	private static int win = -1; // number of gold pieces needed to win
+	private static int[] mapSize = new int[2]; // number of rows, number of cols
+	private static char[][] mapData; // the characters in their relative positions
 
 	private static String selectMap() {
 		int fileCount;
@@ -15,33 +15,39 @@ class Map {
 		do {
 			OutputHandler.addToOutput("WELCOME TO DUNGEON OF DOOOM!\n\n");
 			OutputHandler.addToOutput("Type the number to select a map:\n");
-			File[] fileList = new File("maps").listFiles();
+			File[] fileList = new File("maps").listFiles(); // retrieve names of all files in maps directory
 			filteredFileList = new String[fileList.length];
 			fileCount = 0;
 			for (int i=0 ; i<fileList.length ; i++) {
+				// filter out directories and 'hidden' files
 				if (fileList[i].isFile() & !fileList[i].getName().startsWith(".")) {
 					filteredFileList[fileCount] = fileList[i].getName();
+					// add file number and file name to output buffer
 					OutputHandler.addToOutput("[" + (fileCount + 1) + "] " + fileList[i].getName() + "\n");
 					fileCount++;
 				}
 			}
+			// if this is the first time through this loop, only display the prompt
 			if (input == null) {
 				OutputHandler.addToOutput("\n\n\n> ");
 			}
+			// if user enters QUIT command, do so
 			else if (input.toUpperCase().equals("QUIT")) {
 				OutputHandler.addToOutput("\n> " + input + "\nThanks for playing!\n");
 				OutputHandler.printOutput();
 				System.exit(0);
 			}
+			// if invalid input, display error message and prompt for valid input
 			else {
 				OutputHandler.addToOutput("\n> " + input + "\nInvalid input.\n> ");
 			}
-			OutputHandler.printOutput();
+			OutputHandler.printOutput(); // flush output buffer
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			try {
 				input = in.readLine();
 			}
 			catch (IOException e) {
+				// in theory, this should never happen
 				System.err.println("Error: Could not read input. " + e);
 				System.exit(-1);
 			}
@@ -52,9 +58,9 @@ class Map {
 			catch (NumberFormatException e) {
 				fileNumber = -1;
 			}
-		} while (fileNumber > fileCount - 1 | fileNumber < 0);
+		} while (fileNumber > fileCount - 1 | fileNumber < 0); // keep prompting until user provides valid input
 		
-		
+		// return the filename of the map the user has selected
 		return "maps/" + filteredFileList[fileNumber];
 	}
 	
