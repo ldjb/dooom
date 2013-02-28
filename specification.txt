@@ -1,0 +1,24 @@
+DUNGEON OF DOOOM -- Specification
+By Leon Byford
+
+The 'Dungeon of Dooom' program should meet the following requirements:
+
+== General requirements ==
+* The program must be written in Java.
+* The program must be compatible with Java SE 6.
+
+== Map requirements ==
+* The program must read maps from external files in the specified format.
+* The program must store the map information in a 2D array (int[][] or char[][]).
+
+== Game logic requirements ==
+* The program must randomly position the player within a map.
+* The program must obey the HELLO command.
+* The program must obey the MOVE command.
+* The program must obey the PICKUP command.
+* The program must obey the LOOK command.
+* The program must obey the QUIT command.
+
+== Input/output requirements ==
+* The program must read from the standard input stream.
+* The program must write to the standard output stream.
