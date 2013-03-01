@@ -73,7 +73,7 @@ class GameLogic {
 						}
 						break;
 		}
-		if (gold >= Map.getWin() & symbolAt(playerCoords[0], playerCoords[1]) == 'E') {
+		if (gold >= Map.getWin() && symbolAt(playerCoords[0], playerCoords[1]) == 'E') {
 			return "Congratulations, you win!";
 		}
 		return returnValue;
@@ -83,7 +83,7 @@ class GameLogic {
 		if (command.toUpperCase().equals("HELLO")) {
 			return "GOLD " + Map.getWin();
 		}
-		else if (command.toUpperCase().startsWith("MOVE ") & command.length() == 6) {
+		else if (command.toUpperCase().startsWith("MOVE ") && command.length() == 6) {
 			return movePlayer(command.toUpperCase().charAt(5));
 		}
 		else if (command.toUpperCase().equals("PICKUP")) {
