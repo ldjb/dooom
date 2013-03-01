@@ -1,3 +1,5 @@
+import java.io.*;
+
 class Bot {
 
 	private static char desire = 'G'; // the tile type the bot is currently looking for
@@ -6,7 +8,7 @@ class Bot {
 	private static char direction; // direction of last move command
 	private static int unrestrictedView = 0; // view mode (specified by command-line argument)
 	private static int skipInput = 0; // skip mode (specified by command-line argument)
-	
+
 	private static void setModes(String[] args) {
 		for (String arg : args) {
 			if (arg.equals("-u")) {
@@ -17,7 +19,7 @@ class Bot {
 			}
 		}
 	}
-	
+
 	private static void printBotMap() {
 		int lineCounter = 0;
 		for (char[] line : mapData) {
@@ -67,13 +69,13 @@ class Bot {
 			OutputHandler.addToOutput("\n\n\n\n\n\n\n");
 		}
 	}
-	
+
 	private static void lookReplyMappingArrayAssigner(int index, int charAt, int row, int col) {
 		lookReplyMapping[index][0] = charAt;
 		lookReplyMapping[index][1] = row;
 		lookReplyMapping[index][2] = col;
 	}
-	
+
 	// mapping of LOOKREPLY to positions relative to bot
 	private static void constructLookReplyMappingArray() {
 		lookReplyMappingArrayAssigner( 0, 11, -2, -1);
@@ -99,7 +101,7 @@ class Bot {
 		lookReplyMappingArrayAssigner(20, 37,  2,  1);
 	}
 
-	private static void look() throws Exception {
+	private static void look() {
 		String[] response = sendCommand("LOOK");
 		String lookReply = response[1];
 		for (int[] mapping : lookReplyMapping) {
@@ -112,33 +114,34 @@ class Bot {
 		printScreen(response);
 	}
 
-	private static void markAsSeen() throws Exception {
+	private static void markAsSeen() {
 		if (relSymbol(0, 0) != 'E') {
 			mapData[GameLogic.getCoords()[0]][GameLogic.getCoords()[1]] = 'S';
 		}
 	}
 
-	private static void initMap() throws Exception {
-		mapData = new char[GameLogic.getMapSize()[0]][GameLogic.getMapSize()[1]];
-	}
-
-	private static String[] sendCommand(String command) throws Exception {
+	private static String[] sendCommand(String command) {
 		OutputHandler.addToOutput("> " + command);
 		OutputHandler.printOutput();
 		if (skipInput == 0) {
-			System.in.read();
+			try {
+				System.in.read();
+			}
+			catch (IOException e) {
+				// in theory should never happen, but even if it does happen, it's probably safe to ignore this exception
+			}
 		}
 		OutputHandler.clearScreen();
 		String[] returnArray = {command, GameLogic.processCommand(command)};
 		return returnArray;
 	}
-	
-	private static String[] move(char inDir) throws Exception {
+
+	private static String[] move(char inDir) {
 		markAsSeen();
 		direction = inDir;
 		return sendCommand("MOVE " + Character.toString(inDir));
 	}
-	
+
 	private static void updateDesire() {
 		if (GameLogic.getGold() < GameLogic.getWin()) {
 			desire = 'G';
@@ -148,7 +151,7 @@ class Bot {
 		}
 	}
 
-	private static char relSymbol(int y, int x) throws Exception {
+	private static char relSymbol(int y, int x) {
 		if (GameLogic.getCoords()[0]+y < 0 | GameLogic.getCoords()[0]+y >= GameLogic.getMapSize()[0] | GameLogic.getCoords()[1]+x < 0 | GameLogic.getCoords()[1]+x >= GameLogic.getMapSize()[1]) {
 			return '#';
 		}
@@ -159,7 +162,7 @@ class Bot {
 		return GameLogic.symbolAt(GameLogic.getCoords()[0]+y, GameLogic.getCoords()[1]+x);
 	}
 
-	private static String[] nextCommand() throws Exception {
+	private static String[] nextCommand() {
 		if (relSymbol(0, 0) == desire) {
 			mapData[GameLogic.getCoords()[0]][GameLogic.getCoords()[1]] = '.';
 			return sendCommand("PICKUP");
@@ -410,15 +413,14 @@ class Bot {
 				possibilities = possibilities.replaceAll("E", "");
 			}
 		}
-		
 		return move(possibilities.charAt((int) (Math.random() * possibilities.length())));
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		setModes(args);
 		OutputHandler.clearScreen();
 		GameLogic.init();
-		initMap();
+		mapData = new char[GameLogic.getMapSize()[0]][GameLogic.getMapSize()[1]];
 		constructLookReplyMappingArray();
 		String[] inputOutput = {null, null};
 		while (true) {
@@ -427,5 +429,5 @@ class Bot {
 			inputOutput = nextCommand();
 		}
 	}
-	
+
 }
