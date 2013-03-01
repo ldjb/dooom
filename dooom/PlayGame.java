@@ -2,17 +2,25 @@ import java.io.*;
 
 class PlayGame {
 
-	private static String[] promptUser() throws Exception {
+	private static String[] promptUser() {
 		OutputHandler.addToOutput("> ");
 		OutputHandler.printOutput();
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		String input = in.readLine();
-		OutputHandler.clearScreen();
-		String[] returnArray = {input, GameLogic.processCommand(input)};
-		return returnArray;
+		try {
+			String input = in.readLine();
+			OutputHandler.clearScreen();
+			String[] returnArray = {input, GameLogic.processCommand(input)};
+			return returnArray;
+		}
+		catch (IOException e) {
+			// in theory should never happen
+			System.err.println("Error: Input could not be read.");
+			System.exit(-1);
+			return null;
+		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		OutputHandler.clearScreen();
 		GameLogic.init();
 		String[] inputOutput = {null, null};
@@ -35,5 +43,5 @@ class PlayGame {
 			inputOutput = promptUser();
 		}
 	}
-	
+
 }
