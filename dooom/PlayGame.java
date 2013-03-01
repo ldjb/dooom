@@ -37,7 +37,7 @@ class PlayGame {
 				OutputHandler.addToOutput(inputOutput[1] + "\n");
 				OutputHandler.printOutput();
 				// if user wants to quit the game or has won, quit the game
-				if (inputOutput[0].toUpperCase().equals("QUIT") | inputOutput[1].startsWith("Congrat")) {
+				if (inputOutput[0].toUpperCase().equals("QUIT") || inputOutput[1].startsWith("Congrat")) {
 					System.exit(0);
 				}
 			}
