@@ -8,31 +8,85 @@ As was suggested in the coursework specification, I broke the program up into fo
 * Bot
 
 == User interface ==
-Despite Dungeon of Dooom having a command-line interface, since it is a game, I felt it was important to create a user interface that is as pleasant to use as possible. In fact, I found there were numerous ways this could be achieved.
+Despite Dungeon of Dooom having a command-line interface, since it is a game, I
+felt it was important to create a user interface that is as pleasant to use as
+possible. In fact, I found there were numerous ways this could be achieved.
 
-One of the first issues I encountered was that each time the screen was redrawn, you would be able to see the previous screen above the new one. This could potentially become distracting to players. I did not want the game to display irrelevant information to the player. This is why before each screen is drawn, the previous screen is cleared from view. There is no standard way to do this, so I simply printed a large number of newlines to the output to move the screen above the top of the terminal window.
+One of the first issues I encountered was that each time the screen was
+redrawn, you would be able to see the previous screen above the new one. This
+could potentially become distracting to players. I did not want the game to
+display irrelevant information to the player. This is why before each screen is
+drawn, the previous screen is cleared from view. There is no standard way to do
+this, so I simply printed a large number of newlines to the output to move the
+screen above the top of the terminal window.
 
-Another issue I discovered was that each time the program prints to the output, the screen will gradually scroll upwards. With a large number of print statements, this causes the screen to flicker, which could prove annoying to the user.My solution to this was to use an output buffer. In other words, every time the program wishes to print to the output, it will add the text to the buffer. When it is time to draw the screen, the contents of the buffer is printed to the screen all at once.
+Another issue I discovered was that each time the program prints to the output,
+the screen will gradually scroll upwards. With a large number of print
+statements, this causes the screen to flicker, which could prove annoying to
+the user. My solution to this was to use an output buffer. In other words,
+every time the program wishes to print to the output, it will add the text to
+the buffer. When it is time to draw the screen, the contents of the buffer is
+printed to the screen all at once.
 
-The result of this is that whenever the user submits input by pressing the RETURN key, the screen will move up one line (an unfortunate side-effect that I could not find a solution for) before the screen quickly turns blank whilst the program determines the contents of the next screen. Once this has been determined, it is printed to the screen. There is still flickering, but it is minimal.
+The result of this is that whenever the user submits input by pressing the
+RETURN key, the screen will move up one line (an unfortunate side-effect that I
+could not find a solution for) before the screen quickly turns blank whilst the
+program determines the contents of the next screen. Once this has been
+determined, it is printed to the screen. There is still flickering, but it
+is minimal.
 
-I also ensured that the map, the previous input, the response and the command prompt would always appear in exactly the same position on the screen.
+I also ensured that the map, the previous input, the response and the command
+prompt would always appear in exactly the same position on the screen.
 
 As a result of all this, I feel that the user experience is greatly improved.
 
 == Bot's artificial intelligence ==
-The bot's artificial intelligence was a challenge to implement. Through trial-and-improvement, I devised a set of behaviours that the bot will follow. Depending on the situation the bot is in, it will act differently. At any time when it does not have enough information about the surrounding area to make a decision, it will use the LOOK command and store these details in its memory.
+The bot's artificial intelligence was a challenge to implement. Through
+trial-and-improvement, I devised a set of behaviours that the bot will follow.
+Depending on the situation the bot is in, it will act differently. At any time
+when it does not have enough information about the surrounding area to make a
+decision, it will use the LOOK command and store these details in its memory.
 
-Whilst the bot is looking for gold, it will pick up any gold it stands on. Once the bot has picked up enough gold to exit the map, it will ignore gold and start searching for the exit instead.
+Whilst the bot is looking for gold, it will pick up any gold it stands on. Once
+the bot has picked up enough gold to exit the map, it will ignore gold and
+start searching for the exit instead.
 
-If the bot is not standing on something worthwhile, it will check the tiles in the surrounding area to see if they contain what it desires. The bot will favour tiles it can reach in as few moves as possible. Once it has decided on a tile to move to, it will move in its direction. Where there are multiple possibilities, it will move randomly, although favouring tiles where there is more to gain.
+If the bot is not standing on something worthwhile, it will check the tiles in
+the surrounding area to see if they contain what it desires. The bot will
+favour tiles it can reach in as few moves as possible. Once it has decided on a
+tile to move to, it will move in its direction. Where there are multiple
+possibilities, it will move randomly, although favouring tiles where there is
+more to gain.
 
-If the bot cannot find what it is looking for, its desire will change. If it was previously looking for an exit, it will settle for a piece of gold. If it was previously looking for a piece of gold, it will settle for a tile it hasn't stepped on before.
+If the bot cannot find what it is looking for, its desire will change. If it
+was previously looking for an exit, it will settle for a piece of gold. If it
+was previously looking for a piece of gold, it will settle for a tile it hasn't
+stepped on before.
 
-In the worst case scenario where the bot has no immediate objective, it will move in a pseudo-random fashion. The bot will take into account the directions it can move in that are not blocked by walls, and then choose one of these randomly. One slight issue with using only this method of decision-making is that in a 'corridor' where the bot can only move in two opposite directions, the probability of the bot moving in one direction is the same as moving in the other direction. The effect of this is that the bot tends to move backwards and forwards, making little progress. This was an issue my bot faced at one stage.
+In the worst case scenario where the bot has no immediate objective, it will
+move in a pseudo-random fashion. The bot will take into account the directions
+it can move in that are not blocked by walls, and then choose one of these
+randomly. One slight issue with using only this method of decision-making is
+that in a 'corridor' where the bot can only move in two opposite directions,
+the probability of the bot moving in one direction is the same as moving in the
+other direction. The effect of this is that the bot tends to move backwards and
+forwards, making little progress. This was an issue my bot faced at one stage.
 
-My solution to this, however, was to have the bot remember the direction of its last movement. If it is possible for the bot to move in a direction other than the direction the bot has just come from, it will not turn back upon itself. The solves the issue, meaning that in a corridor, the bot will move along it in a single direction.
+My solution to this, however, was to have the bot remember the direction of its
+last movement. If it is possible for the bot to move in a direction other than
+the direction the bot has just come from, it will not turn back upon itself.
+The solves the issue, meaning that in a corridor, the bot will move along it in
+a single direction.
 
-The fact that the bot makes decisions in a pseudo-random way is important, because it means that the bot cannot be caught up in a loop. Therefore, as long as a map can be cleared, the bot will definitely clear it, even if it takes many moves to do so.
+The fact that the bot makes decisions in a pseudo-random way is important,
+because it means that the bot cannot be caught up in a loop. Therefore, as long
+as a map can be cleared, the bot will definitely clear it, even if it takes
+many moves to do so.
 
-This is the reason why the bot only uses the tiles in its vicinity to decide where to move. It is possible to construct an algorithm that will allow the bot to move more 'intelligently', however this increases the probability that the bot will get stuck. I felt it was important to ensure that the bot would always clear the map and therefore decided against implementing any algorithms that would allow the bot to get stuck. If I had more time, I would implement more intelligent algorithms that would not allow the bot to get stuck.
+This is the reason why the bot only uses the tiles in its vicinity to decide
+where to move. It is possible to construct an algorithm that will allow the bot
+to move more 'intelligently', however this increases the probability that the
+bot will get stuck. I felt it was important to ensure that the bot would always
+clear the map and therefore decided against implementing any algorithms that
+would allow the bot to get stuck. If I had more time, I would implement more
+intelligent algorithms that would not allow the bot to get stuck.
