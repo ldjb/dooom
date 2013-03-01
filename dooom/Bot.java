@@ -125,7 +125,9 @@ class Bot {
 		OutputHandler.printOutput();
 		if (skipInput == 0) {
 			try {
-				System.in.read();
+				if (System.in.read() == -1) {
+					System.exit(0);
+				}
 			}
 			catch (IOException e) {
 				// in theory should never happen, but even if it does happen, it's probably safe to ignore this exception
