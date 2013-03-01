@@ -20,7 +20,7 @@ class Map {
 			fileCount = 0;
 			for (int i=0 ; i<fileList.length ; i++) {
 				// filter out directories and 'hidden' files
-				if (fileList[i].isFile() & !fileList[i].getName().startsWith(".")) {
+				if (fileList[i].isFile() && !fileList[i].getName().startsWith(".")) {
 					filteredFileList[fileCount] = fileList[i].getName();
 					// add file number and file name to output buffer
 					OutputHandler.addToOutput("[" + (fileCount + 1) + "] " + fileList[i].getName() + "\n");
@@ -58,7 +58,7 @@ class Map {
 			catch (NumberFormatException e) {
 				fileNumber = -1;
 			}
-		} while (fileNumber > fileCount - 1 | fileNumber < 0); // keep prompting until user provides valid input
+		} while (fileNumber > fileCount - 1 || fileNumber < 0); // keep prompting until user provides valid input
 		
 		// return the filename of the map the user has selected
 		return "maps/" + filteredFileList[fileNumber];
@@ -69,7 +69,7 @@ class Map {
 			BufferedReader in = new BufferedReader(new FileReader(mapName));
 			String line;
 			while ((line = in.readLine()) != null) {
-				if (!line.startsWith("name ") & !line.startsWith("win ") & line.length() != 0) {
+				if (!line.startsWith("name ") && !line.startsWith("win ") && line.length() != 0) {
 					mapSize[0]++;
 					mapSize[1] = line.trim().length();
 				}
@@ -146,7 +146,7 @@ class Map {
 		for (char[] line : mapData) {
 			int symbolCounter = 0;
 			for (char symbol : line) {
-				if (lineCounter == playerRow & symbolCounter == playerCol) {
+				if (lineCounter == playerRow && symbolCounter == playerCol) {
 					OutputHandler.addToOutput(playerSymbol);
 				}
 				else {
@@ -160,7 +160,7 @@ class Map {
 	}
 	
 	public static char symbolAt(int row, int col) {
-		if (row < 0 | row >= mapSize[0] | col < 0 | col >= mapSize[1]) {
+		if (row < 0 || row >= mapSize[0] || col < 0 || col >= mapSize[1]) {
 			return '#';
 		}
 		return mapData[row][col];
