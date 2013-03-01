@@ -51,7 +51,7 @@ screen similar to the following:
     │ #..........G......#               │
     │ #.........  .....                 │
     │  ......                           │
-    │ 				                    │
+    │                                   │
     │                                   │
     │ > MOVE W                          │
     │ SUCCESS                           │

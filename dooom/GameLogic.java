@@ -2,8 +2,8 @@ import java.io.*;
 
 class GameLogic {
 	
-	private static int[] playerCoords = new int[2];
-	private static int gold = 0;
+	private static int[] playerCoords = new int[2]; // row and column player is in
+	private static int gold = 0; // amount of gold the player has
 	
 	public static int[] getMapSize() {
 		return Map.getSize();
@@ -14,9 +14,9 @@ class GameLogic {
 	}
 	
 	private static void validateMap() {
-		int errorFlag = 0;
-		int goldCounter = 0;
-		int exitCounter = 0;
+		int errorFlag = 0; // 0: no error, 1: there is an error
+		int goldCounter = 0; // number of gold pieces in the map
+		int exitCounter = 0; // number of exits in the map
 		for (int i=0 ; i < getMapSize()[0] ; i++) {
 			for (int j=0 ; j < getMapSize()[1] ; j++) {
 				if (symbolAt(i, j) == 'G') {
@@ -45,7 +45,7 @@ class GameLogic {
 		playerCoords[0] = (int) (Math.random() * (mapSize[0]));
 		playerCoords[1] = (int) (Math.random() * (mapSize[1]));
 		if (symbolAt(playerCoords[0], playerCoords[1]) == '#') {
-			spawnPlayer();
+			spawnPlayer(); // keep moving player until player is not in a wall
 		}
 	}
 

@@ -1,11 +1,11 @@
 class Bot {
 
-	private static char desire = 'G';
+	private static char desire = 'G'; // the tile type the bot is currently looking for
 	private static char[][] mapData;
 	private static int[][] lookReplyMapping = new int[21][3];
-	private static char direction;
-	private static int unrestrictedView = 0;
-	private static int skipInput = 0;
+	private static char direction; // direction of last move command
+	private static int unrestrictedView = 0; // view mode (specified by command-line argument)
+	private static int skipInput = 0; // skip mode (specified by command-line argument)
 	
 	private static void setModes(String[] args) {
 		for (String arg : args) {
@@ -29,7 +29,7 @@ class Bot {
 				else if (symbol == 'S') {
 					OutputHandler.addToOutput('.');
 				}
-				else if (symbol == '\u0000') {
+				else if (symbol == '\u0000') { // if tile has not been seen, show a space
 					OutputHandler.addToOutput(' ');
 				}
 				else {
@@ -74,6 +74,7 @@ class Bot {
 		lookReplyMapping[index][2] = col;
 	}
 	
+	// mapping of LOOKREPLY to positions relative to bot
 	private static void constructLookReplyMappingArray() {
 		lookReplyMappingArrayAssigner( 0, 11, -2, -1);
 		lookReplyMappingArrayAssigner( 1, 12, -2,  0);
@@ -186,7 +187,7 @@ class Bot {
 						if (relSymbol(-1, 0) != '#') {
 							possibilities += "N";
 						}
-/* else if(?) */		if (relSymbol(0, -1) != '#') {
+						if (relSymbol(0, -1) != '#') {
 							possibilities += "W";
 						}
 					}
@@ -194,7 +195,7 @@ class Bot {
 						if (relSymbol(-1, 0) != '#') {
 							possibilities += "N";
 						}
-/* else if(?) */		if (relSymbol(0, 1) != '#') {
+						if (relSymbol(0, 1) != '#') {
 							possibilities += "E";
 						}
 					}
@@ -202,7 +203,7 @@ class Bot {
 						if (relSymbol(1, 0) != '#') {
 							possibilities += "S";
 						}
-/* else if(?) */		if (relSymbol(0, 1) != '#') {
+						if (relSymbol(0, 1) != '#') {
 							possibilities += "E";
 						}
 					}
@@ -210,7 +211,7 @@ class Bot {
 						if (relSymbol(1, 0) != '#') {
 							possibilities += "S";
 						}
-/* else if(?) */		if (relSymbol(0, -1) != '#') {
+						if (relSymbol(0, -1) != '#') {
 							possibilities += "W";
 						}
 					}
@@ -365,7 +366,7 @@ class Bot {
 				}
 				possibleMoves++;
 			}
-			if (desire == 'E') { // not sure about this whole part
+			if (desire == 'E') {
 				desire = 'G';
 			}
 			else if (desire == 'G') {
