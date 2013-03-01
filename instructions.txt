@@ -1,0 +1,94 @@
+╔═════════════════════════════════╗
+║ Dungeon of Dooom - Instructions ║
+╠═════════════════════════════════╣
+║         By: Leon Byford         ║
+║       <ldjb20@bath.ac.uk>       ║
+╚═════════════════════════════════╝
+
+【Loading maps】
+
+  When you start Dungeon of Dooom, you will see a screen similar to the
+following:
+
+    ┌──────────────────────────────────┐
+    │ WELCOME TO DUNGEON OF DOOOM!     │
+    │                                  │
+    │ Type the number to select a map: │
+    │ [1] example_map_1                │
+    │ [2] example_map_2                │
+    │ [3] ldjb20_corners               │
+    │ [4] ldjb20_csoamgbk              │
+    │                                  │
+    │                                  │
+    │                                  │
+    │ > 1_                             │
+    └──────────────────────────────────┘
+
+  This lists all the files in the maps directory. Type the number next to the
+map you wish to load and press the RETURN button on your keyboard. The game will
+then commence.
+
+【Using the bot】
+
+  To use the bot, start the game using the following command prompt whilst in
+the correct directory:
+
+    $ java Bot
+
+  The game will ask you to select a map (see the "Loading maps" section for more
+information). Once you have selected a map, the game starts and you will see a
+screen similar to the following:
+
+    ┌───────────────────────────────────┐
+    │ DUNGEON OF DOOOM                  │
+    │ Very Small Labyrinth of Dooom (1) │
+    │                                   │
+    │ ###################               │
+    │ #.................#               │
+    │ #...............E.#               │
+    │ #.................#               │
+    │ #..E........B.....#               │
+    │ #..........G......#               │
+    │ #.........  .....                 │
+    │  ......                           │
+    │ 				                    │
+    │                                   │
+    │ > MOVE W                          │
+    │ SUCCESS                           │
+    │                                   │
+    │                                   │
+    │                                   │
+    │                                   │
+    │                                   │
+    │ > MOVE S_                         │
+    └───────────────────────────────────┘
+
+  The screen layout is similar to that of when a human is playing. At the top of
+the screen is the name of the game (Dungeon of Dooom), as well as the name of
+the map (in this case, Very Small Labyrinth of Dooom). Next to that, the number
+of gold pieces still required is displayed in parentheses.
+
+  Beneath that, the map is displayed. Only tiles that the bot has seen using the
+LOOK command is shown. Under that, the previous command and the game's response
+is displayed.
+
+  At the very bottom of the screen is the next command to be submitted. When a
+bot is in use, this is filled in automatically. Pressing the RETURN button on
+your keyboard will submit this command. Any other input from the user is
+ignored.
+
+  Two command line argument flags are available to change how the bot mode
+functions. They are as follows:
+
+    -s    Skip mode. The bot will not wait for the user to press the RETURN
+        button. Instead, it will submit commands automatically until it has
+        beaten the game.
+
+    -u    Unrestricted view mode. The complete map will be displayed to the
+        user, not just the tiles the bot has seen. Note that the functionality
+        of the bot does not change; it will still need to check tiles using the
+        LOOK command.
+
+  These command line flags can be used like so:
+
+    $ java Bot -s -u
