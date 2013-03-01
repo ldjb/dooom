@@ -45,6 +45,10 @@ class Map {
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			try {
 				input = in.readLine();
+				if (input == null) {
+					// if user presses Ctrl+D, treat it as a QUIT command
+					input = "QUIT";
+				}
 			}
 			catch (IOException e) {
 				// in theory, this should never happen
