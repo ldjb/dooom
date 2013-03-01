@@ -25,7 +25,7 @@ class Bot {
 		for (char[] line : mapData) {
 			int symbolCounter = 0;
 			for (char symbol : line) {
-				if (lineCounter == GameLogic.getCoords()[0] & symbolCounter == GameLogic.getCoords()[1]) {
+				if (lineCounter == GameLogic.getCoords()[0] && symbolCounter == GameLogic.getCoords()[1]) {
 					OutputHandler.addToOutput('B');
 				}
 				else if (symbol == 'S') {
@@ -61,7 +61,7 @@ class Bot {
 				OutputHandler.addToOutput("\n\n\n\n\n");
 			}
 			OutputHandler.printOutput();
-			if (IOData[0].toUpperCase().equals("QUIT") | IOData[1].startsWith("Congrat")) {
+			if (IOData[0].toUpperCase().equals("QUIT") || IOData[1].startsWith("Congrat")) {
 				System.exit(0);
 			}
 		}
@@ -105,7 +105,7 @@ class Bot {
 		String[] response = sendCommand("LOOK");
 		String lookReply = response[1];
 		for (int[] mapping : lookReplyMapping) {
-			if (!(GameLogic.getCoords()[0]+mapping[1] < 0 | GameLogic.getCoords()[0]+mapping[1] >= GameLogic.getMapSize()[0] | GameLogic.getCoords()[1]+mapping[2] < 0 | GameLogic.getCoords()[1]+mapping[2] >= GameLogic.getMapSize()[1])) {
+			if (!(GameLogic.getCoords()[0]+mapping[1] < 0 || GameLogic.getCoords()[0]+mapping[1] >= GameLogic.getMapSize()[0] || GameLogic.getCoords()[1]+mapping[2] < 0 || GameLogic.getCoords()[1]+mapping[2] >= GameLogic.getMapSize()[1])) {
 				if (mapData[GameLogic.getCoords()[0] + mapping[1]][GameLogic.getCoords()[1] + mapping[2]] != 'S') {
 					mapData[GameLogic.getCoords()[0] + mapping[1]][GameLogic.getCoords()[1] + mapping[2]] = lookReply.charAt(mapping[0]);
 				}
@@ -152,7 +152,7 @@ class Bot {
 	}
 
 	private static char relSymbol(int y, int x) {
-		if (GameLogic.getCoords()[0]+y < 0 | GameLogic.getCoords()[0]+y >= GameLogic.getMapSize()[0] | GameLogic.getCoords()[1]+x < 0 | GameLogic.getCoords()[1]+x >= GameLogic.getMapSize()[1]) {
+		if (GameLogic.getCoords()[0]+y < 0 || GameLogic.getCoords()[0]+y >= GameLogic.getMapSize()[0] || GameLogic.getCoords()[1]+x < 0 || GameLogic.getCoords()[1]+x >= GameLogic.getMapSize()[1]) {
 			return '#';
 		}
 		if (mapData[GameLogic.getCoords()[0]+y][GameLogic.getCoords()[1]+x] != '\u0000') {
