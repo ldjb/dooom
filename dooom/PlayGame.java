@@ -9,6 +9,10 @@ class PlayGame {
 		try {
 			// read input and store input and result in an array
 			String input = in.readLine();
+			if (input == null) {
+				// if user presses Ctrl+D, treat it as a QUIT command
+				input = "QUIT";
+			}
 			OutputHandler.clearScreen();
 			String[] returnArray = {input, GameLogic.processCommand(input)};
 			return returnArray;
