@@ -20,7 +20,9 @@ public class Client {
 			while ((fromServer = in.readLine()) != null) {
 				System.out.println(fromServer);
 				fromUser = stdIn.readLine();
-				out.println(fromUser);
+				if (fromUser != null) {
+					out.println(fromUser);
+				}
 			}
 			out.close();
 			in.close();
