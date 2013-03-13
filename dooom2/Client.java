@@ -19,10 +19,7 @@ public class Client {
 			
 			while ((fromServer = in.readLine()) != null) {
 				System.out.println(fromServer);
-				fromUser = stdIn.readLine();
-				if (fromUser != null) {
-					out.println(fromUser);
-				}
+				(new Thread(new Listener(out, stdIn))).start();
 			}
 			out.close();
 			in.close();
