@@ -31,8 +31,7 @@ public class Server {
 
 		Protocol protocol = new Protocol();
 
-		outputLine = protocol.playerCommand("look");
-        out.println(outputLine);
+        out.println("");
 
         while ((inputLine = in.readLine()) != null) {
              outputLine = protocol.playerCommand(inputLine);
