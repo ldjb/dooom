@@ -6,6 +6,9 @@ public class Server implements Runnable {
 // http://docs.oracle.com/javase/tutorial/networking/sockets/examples/KnockKnockServer.java
 
 	Socket clientSocket = null;
+	
+	static DODMap map;
+	//static Protocol protocol;
 
 	public Server(Socket client) {
 		clientSocket = client;
@@ -19,9 +22,7 @@ public class Server implements Runnable {
 					new InputStreamReader(
 					clientSocket.getInputStream()));
 			String inputLine, outputLine;
-	
-			Protocol protocol = new Protocol();
-	
+	Protocol protocol = new Protocol(map);
 			while ((inputLine = in.readLine()) != null) {
 				 outputLine = protocol.playerCommand(inputLine);
 				 out.println(outputLine);
@@ -46,6 +47,10 @@ public class Server implements Runnable {
         }
 
 		Socket client = null;
+		
+		map = new DODMap();
+		
+		//protocol = new Protocol(map);
 		
 		while (true) { // loop should break when number of clients == 0
 			try {

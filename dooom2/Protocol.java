@@ -12,7 +12,7 @@ public class Protocol
 	public static final int MODE_BOT = 1;
 	
 	// The game object for this player.
-	private DODGame game;
+	private NetDODGame game;
 	
 	
 	/**
@@ -21,7 +21,14 @@ public class Protocol
 	public Protocol()
 	{
 		//create an instance of the DODGame
-		game = new DODGame();
+		game = new NetDODGame();
+		//play();
+	}
+	
+	public Protocol(DODMap map)
+	{
+		//create an instance of the DODGame
+		game = new NetDODGame(map);
 		//play();
 	}
 	
@@ -34,7 +41,7 @@ public class Protocol
 	public Protocol(String map)
 	{		
 		//create an instance of the DODGame
-		game = new DODGame(map);
+		game = new NetDODGame(map);
 		//play();
 	}
 	
