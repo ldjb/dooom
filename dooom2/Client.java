@@ -25,8 +25,13 @@ public class Client {
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String fromServer;
 			String fromUser;
-			
-			(new Thread(new Listener(out, stdIn))).start();
+
+			if (args.length < 3) {
+				(new Thread(new Listener(out, stdIn))).start();
+			}
+			else {
+				(new Thread(new Listener(out))).start();
+			}
 			
 			while ((fromServer = in.readLine()) != null) {
 				System.out.println(fromServer);
