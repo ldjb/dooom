@@ -9,19 +9,19 @@ public class Client {
 	public static void main(String[] args) {
 		
 		try {
-			Socket echoSocket;
+			Socket serverSocket;
 			switch (args.length) {
-				case 1 :	echoSocket = new Socket(args[0], 50898);
+				case 1 :	serverSocket = new Socket(args[0], 50898);
 							break;
 							
-				case 2 :	echoSocket = new Socket(args[0], Integer.parseInt(args[1]));
+				case 2 :	serverSocket = new Socket(args[0], Integer.parseInt(args[1]));
 							break;
 							
-				default:	echoSocket = new Socket("localhost", 50898);
+				default:	serverSocket = new Socket("localhost", 50898);
 							break;
 			}
-			PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
-			BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+			PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
+			BufferedReader in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			String fromServer;
 			String fromUser;
@@ -34,15 +34,11 @@ public class Client {
 			out.close();
 			in.close();
 			stdIn.close();
-			echoSocket.close();
+			serverSocket.close();
 			
 		}
-		catch (ConnectException e) {
-			System.err.println("Error: Could not connect. " + e.getMessage());
-			System.exit(-1);
-		}
 		catch (Exception e) {
-			System.err.println(e);
+			System.err.println("Error: " + e);
 			System.exit(-1);
 		}
 		
