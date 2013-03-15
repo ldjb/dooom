@@ -36,7 +36,7 @@ public class Server implements Runnable {
 		}
 	}
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
     
 		ServerSocket serverSocket = null;
 		try {
