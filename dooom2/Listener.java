@@ -20,6 +20,7 @@ public class Listener implements Runnable {
 		}
 		catch (IOException e) {
 			System.err.println("Error: " + e);
+			System.exit(-1);
 		}
 	}
 	
