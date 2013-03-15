@@ -10,6 +10,7 @@ public class Bot {
 			"PICKUP"
 		};
 		
+		// randomly choose a command
 		return commands[(int) (Math.random() * commands.length)];
 	
 	}

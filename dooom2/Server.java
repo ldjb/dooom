@@ -26,14 +26,15 @@ public class Server implements Runnable {
 			String inputLine, outputLine;
 			Protocol protocol = new Protocol(map);
 			while ((inputLine = in.readLine()) != null) {
+				// keep getting input from user and send back a response
 				 outputLine = protocol.playerCommand(inputLine);
 				 out.println(outputLine);
 			}
 			out.close();
 			in.close();
 			clientSocket.close();
-			numOfClients--;
-			if (numOfClients == 0) {
+			numOfClients--; // update number of connected clients
+			if (numOfClients == 0) { // if this is the last client, close socket
 				serverSocket.close();
 			}
 		}
@@ -46,7 +47,7 @@ public class Server implements Runnable {
     public static void main(String[] args) {
     
 		try {
-        	if (args.length > 0) {
+        	if (args.length > 0) { // port has been specified
         		serverSocket = new ServerSocket(Integer.parseInt(args[0]));
         	}
 			else {
@@ -63,15 +64,15 @@ public class Server implements Runnable {
 		map = new DODMap();
 		
 		try {
-			do {
+			do { // keep repeating while there are clients connected
 				try {
 					client = serverSocket.accept();
 				}
-				catch (SocketException e) {
+				catch (SocketException e) { // if socket has closed, quit program
 					System.exit(0);
 				}
 				(new Thread(new Server(client))).start();
-				numOfClients++;
+				numOfClients++; // keep track of how many clients there are
 			} while (numOfClients > 0);
 			serverSocket.close();
 		}

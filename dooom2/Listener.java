@@ -8,11 +8,13 @@ public class Listener implements Runnable {
 	String fromUser;
 	boolean bot = false;
 	
+	// human player
 	public Listener(PrintWriter out, BufferedReader stdIn) {
 		server = out;
 		in = stdIn;
 	}
 	
+	// bot player
 	public Listener(PrintWriter out) {
 		server = out;
 		bot = true;
@@ -20,13 +22,13 @@ public class Listener implements Runnable {
 
 	public void run() {
 		if (bot) {
-			System.out.println("asdf");
-			while (true) {
+			while (true) { // keep getting command for bot
 				server.println(Bot.getCommand());
 			}
 		}
 		else {
 			try {
+				// keep getting input from user and send to server
 				while ((fromUser = in.readLine()) != null) {
 					server.println(fromUser);
 				}

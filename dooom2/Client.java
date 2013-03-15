@@ -10,11 +10,11 @@ public class Client {
 		
 		try {
 			Socket serverSocket;
-			switch (args.length) {
-				case 1 :	serverSocket = new Socket(args[0], 50898);
+			switch (args.length) { // check number of command-line arguments
+				case 1 :	serverSocket = new Socket(args[0], 50898); // hostname has been specified
 							break;
 							
-				case 2 :	serverSocket = new Socket(args[0], Integer.parseInt(args[1]));
+				case 2 :	serverSocket = new Socket(args[0], Integer.parseInt(args[1])); // both hostname and port have been specified
 							break;
 							
 				default:	serverSocket = new Socket("localhost", 50898);
@@ -27,12 +27,15 @@ public class Client {
 			String fromUser;
 
 			if (args.length < 3) {
+				// human player
 				(new Thread(new Listener(out, stdIn))).start();
 			}
 			else {
+				// bot player doesn't need stdIn
 				(new Thread(new Listener(out))).start();
 			}
 			
+			// keep printing data received from server
 			while ((fromServer = in.readLine()) != null) {
 				System.out.println(fromServer);
 			}
