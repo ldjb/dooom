@@ -9,8 +9,17 @@ public class Client {
 	public static void main(String[] args) {
 		
 		try {
-		
-			Socket echoSocket = new Socket("localhost", 50898);
+			Socket echoSocket;
+			switch (args.length) {
+				case 1 :	echoSocket = new Socket(args[0], 50898);
+							break;
+							
+				case 2 :	echoSocket = new Socket(args[0], Integer.parseInt(args[1]));
+							break;
+							
+				default:	echoSocket = new Socket("localhost", 50898);
+							break;
+			}
 			PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));

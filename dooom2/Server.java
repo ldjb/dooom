@@ -40,7 +40,12 @@ public class Server implements Runnable {
     
 		ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(50898);
+        	if (args.length > 0) {
+        		serverSocket = new ServerSocket(Integer.parseInt(args[0]));
+        	}
+			else {
+				serverSocket = new ServerSocket(50898);
+			}
         } catch (IOException e) {
             System.err.println("Could not listen on port: 4444.");
             System.exit(1);
