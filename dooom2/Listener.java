@@ -5,6 +5,7 @@ public class Listener implements Runnable {
 	
 	PrintWriter server;
 	BufferedReader in;
+	String fromUser;
 	
 	public Listener(PrintWriter out, BufferedReader stdIn) {
 		server = out;
@@ -13,7 +14,9 @@ public class Listener implements Runnable {
 
 	public void run() {
 		try {
-			server.println(in.readLine());
+			while ((fromUser = in.readLine()) != null) {
+				server.println(fromUser);
+			}
 		}
 		catch (IOException e) {
 			System.err.println("Error: " + e);
