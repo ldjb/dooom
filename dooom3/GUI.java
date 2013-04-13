@@ -130,17 +130,49 @@ public class GUI extends JFrame {
 		setJMenuBar(jMenuBar1);
 
 		jPanel1.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
 		jButton3.setText("↑");
+		jButton3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				formSubmitted("MOVE N");
+			}
+		});
+
 		jButton4.setText("↓");
+		jButton4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				formSubmitted("MOVE S");
+			}
+		});
+
 		jButton5.setText("←");
+		jButton5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				formSubmitted("MOVE W");
+			}
+		});
+
 		jButton6.setText("→");
+		jButton6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				formSubmitted("MOVE E");
+			}
+		});
+
 		jButton7.setText("←");
 		jButton8.setText("↑");
 		jButton9.setText("→");
 		jButton10.setText("↓");
 		jLabel3.setIcon(new ImageIcon("resources/swords.png")); // http://commons.wikimedia.org/wiki/File:Swords.svg
 		jLabel4.setIcon(new ImageIcon("resources/shoe.png")); // http://www.clker.com/clipart-shoe-print-24.html
+
 		jButton11.setText("Pick up");
+		jButton11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				formSubmitted("PICKUP");
+			}
+		});
+
 		jButton12.setText("End turn");
 
 		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
@@ -267,6 +299,20 @@ public class GUI extends JFrame {
 				jButton1.setEnabled(false);
 				this.requestFocusInWindow();
 			}
+		}
+	}
+
+	public void formSubmitted(String command) {
+		jTextArea2.setText(GameLogic.processCommand(command));
+		jTextArea1.setText(Map.get('P', GameLogic.getCoords()[0], GameLogic.getCoords()[1]));
+		jLabel2.setText(Integer.toString(GameLogic.getGold()) + "/" + Integer.toString(GameLogic.getWin()));
+		if (GameLogic.getGold() >= GameLogic.getWin()) {
+			jLabel2.setFont(new Font(jLabel2.getFont().getName(), Font.BOLD, jLabel2.getFont().getSize()));
+		}
+		if (jTextArea2.getText().startsWith("Congrat")) {
+			jTextField1.setEditable(false);
+			jButton1.setEnabled(false);
+			this.requestFocusInWindow();
 		}
 	}
 	
