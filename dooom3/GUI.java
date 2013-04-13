@@ -138,8 +138,8 @@ public class GUI extends JFrame {
 		jButton8.setText("↑");
 		jButton9.setText("→");
 		jButton10.setText("↓");
-		jLabel3.setIcon(new ImageIcon("resources/gold.png")); // NOI18N
-		jLabel4.setIcon(new ImageIcon("resources/gold.png")); // NOI18N
+		jLabel3.setIcon(new ImageIcon("resources/swords.png")); // http://commons.wikimedia.org/wiki/File:Swords.svg
+		jLabel4.setIcon(new ImageIcon("resources/shoe.png")); // http://www.clker.com/clipart-shoe-print-24.html
 		jButton11.setText("Pick up");
 		jButton12.setText("End turn");
 
