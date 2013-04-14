@@ -248,7 +248,6 @@ public class GUI extends JFrame {
 						.addComponent(jButton9, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		//some extra stuff goes here IMPORTANT
 		jPanel1Layout.setVerticalGroup(
 			jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 			.addGroup(jPanel1Layout.createSequentialGroup()
