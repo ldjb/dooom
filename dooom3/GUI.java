@@ -324,53 +324,14 @@ public class GUI extends JFrame {
 
 	private void formSubmitted() {
 		if (!jTextField1.getText().equals("")) {
-			jTextArea2.setText(GameLogic.processCommand(jTextField1.getText()));
+			formSubmitted(jTextField1.getText());
 			jTextField1.setText(null);
-			jTextArea1.setText(Map.get('P', GameLogic.getCoords()[0], GameLogic.getCoords()[1]));
-			jLabel2.setText(Integer.toString(GameLogic.getGold()) + "/" + Integer.toString(GameLogic.getWin()));
-			if (GameLogic.getGold() >= GameLogic.getWin()) {
-				jLabel2.setFont(new Font(jLabel2.getFont().getName(), Font.BOLD, jLabel2.getFont().getSize()));
-			}
-			if (jTextArea2.getText().startsWith("Congrat")) {
-				jTextField1.setEditable(false);
-				jButton1.setEnabled(false);
-				jButton3.setEnabled(false);
-				jButton4.setEnabled(false);
-				jButton5.setEnabled(false);
-				jButton6.setEnabled(false);
-				jButton7.setEnabled(false);
-				jButton8.setEnabled(false);
-				jButton9.setEnabled(false);
-				jButton10.setEnabled(false);
-				jButton11.setEnabled(false);
-				jButton12.setEnabled(false);
-				this.requestFocusInWindow();
-			}
 		}
 	}
 
 	private void formSubmitted(String command) {
-		jTextArea2.setText(GameLogic.processCommand(command));
-		jTextArea1.setText(Map.get('P', GameLogic.getCoords()[0], GameLogic.getCoords()[1]));
-		jLabel2.setText(Integer.toString(GameLogic.getGold()) + "/" + Integer.toString(GameLogic.getWin()));
-		if (GameLogic.getGold() >= GameLogic.getWin()) {
-			jLabel2.setFont(new Font(jLabel2.getFont().getName(), Font.BOLD, jLabel2.getFont().getSize()));
-		}
-		if (jTextArea2.getText().startsWith("Congrat")) {
-			jTextField1.setEditable(false);
-			jButton1.setEnabled(false);
-			jButton3.setEnabled(false);
-			jButton4.setEnabled(false);
-			jButton5.setEnabled(false);
-			jButton6.setEnabled(false);
-			jButton7.setEnabled(false);
-			jButton8.setEnabled(false);
-			jButton9.setEnabled(false);
-			jButton10.setEnabled(false);
-			jButton11.setEnabled(false);
-			jButton12.setEnabled(false);
-			this.requestFocusInWindow();
-		}
+		toServer.println(command);
+		toServer.println("LOOK");
 	}
 	
 	private void aboutDialogue() {
@@ -402,11 +363,11 @@ public class GUI extends JFrame {
 		jButton12.setEnabled(true);
 
 		try {
-			Socket serverSocket = new Socket("localhost", 50898);
-			BufferedReader fromServer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
-			PrintWriter toServer = new PrintWriter(serverSocket.getOutputStream(), true);
+			serverSocket = new Socket("localhost", 50898);
+			fromServer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
+			toServer = new PrintWriter(serverSocket.getOutputStream(), true);
 			(new Thread(new Listener(this, fromServer))).start();
-			(new Thread(new Speaker(this, toServer))).start();
+			//(new Thread(new Speaker(this, toServer))).start();
 		}
 		catch (IOException e) {
 			System.err.println("Error: " + e);
@@ -450,5 +411,14 @@ public class GUI extends JFrame {
 	private JLabel jLabel4;
 	private JPanel jPanel1;
 	
+	private Socket serverSocket;
+	private BufferedReader fromServer;
+	private PrintWriter toServer;
+
+	//temp stuff
+	public void print(String text) {
+		jTextArea1.append(text + "\n");
+	}
+
 
 }
