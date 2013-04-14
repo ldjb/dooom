@@ -79,7 +79,6 @@ public class GUI extends JFrame {
 		jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		jButton1.setEnabled(false);
-		jButton1.setFocusable(false);
 		jButton1.setText("Submit");
 		jButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -131,6 +130,7 @@ public class GUI extends JFrame {
 
 		jPanel1.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+		jButton3.setEnabled(false);
 		jButton3.setText("↑");
 		jButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -138,6 +138,7 @@ public class GUI extends JFrame {
 			}
 		});
 
+		jButton4.setEnabled(false);
 		jButton4.setText("↓");
 		jButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -145,6 +146,7 @@ public class GUI extends JFrame {
 			}
 		});
 
+		jButton5.setEnabled(false);
 		jButton5.setText("←");
 		jButton5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -152,6 +154,7 @@ public class GUI extends JFrame {
 			}
 		});
 
+		jButton6.setEnabled(false);
 		jButton6.setText("→");
 		jButton6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -159,13 +162,22 @@ public class GUI extends JFrame {
 			}
 		});
 
+		jButton7.setEnabled(false);
 		jButton7.setText("←");
+
+		jButton8.setEnabled(false);
 		jButton8.setText("↑");
+
+		jButton9.setEnabled(false);
 		jButton9.setText("→");
+
+		jButton10.setEnabled(false);
 		jButton10.setText("↓");
+
 		jLabel3.setIcon(new ImageIcon("resources/swords.png")); // http://commons.wikimedia.org/wiki/File:Swords.svg
 		jLabel4.setIcon(new ImageIcon("resources/shoe.png")); // http://www.clker.com/clipart-shoe-print-24.html
 
+		jButton11.setEnabled(false);
 		jButton11.setText("Pick up");
 		jButton11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -173,6 +185,7 @@ public class GUI extends JFrame {
 			}
 		});
 
+		jButton12.setEnabled(false);
 		jButton12.setText("End turn");
 
 		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
@@ -297,6 +310,16 @@ public class GUI extends JFrame {
 			if (jTextArea2.getText().startsWith("Congrat")) {
 				jTextField1.setEditable(false);
 				jButton1.setEnabled(false);
+				jButton3.setEnabled(false);
+				jButton4.setEnabled(false);
+				jButton5.setEnabled(false);
+				jButton6.setEnabled(false);
+				jButton7.setEnabled(false);
+				jButton8.setEnabled(false);
+				jButton9.setEnabled(false);
+				jButton10.setEnabled(false);
+				jButton11.setEnabled(false);
+				jButton12.setEnabled(false);
 				this.requestFocusInWindow();
 			}
 		}
@@ -312,6 +335,16 @@ public class GUI extends JFrame {
 		if (jTextArea2.getText().startsWith("Congrat")) {
 			jTextField1.setEditable(false);
 			jButton1.setEnabled(false);
+			jButton3.setEnabled(false);
+			jButton4.setEnabled(false);
+			jButton5.setEnabled(false);
+			jButton6.setEnabled(false);
+			jButton7.setEnabled(false);
+			jButton8.setEnabled(false);
+			jButton9.setEnabled(false);
+			jButton10.setEnabled(false);
+			jButton11.setEnabled(false);
+			jButton12.setEnabled(false);
 			this.requestFocusInWindow();
 		}
 	}
@@ -342,6 +375,16 @@ public class GUI extends JFrame {
 			jLabel2.setIcon(new ImageIcon("resources/gold.png")); // http://www.iconfinder.com/icondetails/65599/48/cash_gold_money_payment_icon
 			jTextField1.setEditable(true);
 			jButton1.setEnabled(true);
+			jButton3.setEnabled(true);
+			jButton4.setEnabled(true);
+			jButton5.setEnabled(true);
+			jButton6.setEnabled(true);
+			jButton7.setEnabled(true);
+			jButton8.setEnabled(true);
+			jButton9.setEnabled(true);
+			jButton10.setEnabled(true);
+			jButton11.setEnabled(true);
+			jButton12.setEnabled(true);
 		}
 	}
 
