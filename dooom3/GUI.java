@@ -386,30 +386,33 @@ public class GUI extends JFrame {
 	}
 
 	private void newGame() {
-		JFileChooser fc = new JFileChooser("maps");
-		if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			jMenuItem1.setEnabled(false);
-			GameLogic.init(fc.getSelectedFile().toString());
-			jLabel1.setText(GameLogic.getMapName());
-			jTextArea1.setText(Map.get('P', GameLogic.getCoords()[0], GameLogic.getCoords()[1]));
-			jLabel2.setText(Integer.toString(GameLogic.getGold()) + "/" + Integer.toString(GameLogic.getWin()));
-			if (GameLogic.getGold() >= GameLogic.getWin()) {
-				jLabel2.setFont(new Font(jLabel2.getFont().getName(), Font.BOLD, jLabel2.getFont().getSize()));
-			}
-			jLabel2.setIcon(new ImageIcon("resources/gold.png")); // http://www.iconfinder.com/icondetails/65599/48/cash_gold_money_payment_icon
-			jTextField1.setEditable(true);
-			jButton1.setEnabled(true);
-			jButton3.setEnabled(true);
-			jButton4.setEnabled(true);
-			jButton5.setEnabled(true);
-			jButton6.setEnabled(true);
-			jButton7.setEnabled(true);
-			jButton8.setEnabled(true);
-			jButton9.setEnabled(true);
-			jButton10.setEnabled(true);
-			jButton11.setEnabled(true);
-			jButton12.setEnabled(true);
+		jMenuItem1.setEnabled(false);
+		jLabel2.setIcon(new ImageIcon("resources/gold.png")); // http://www.iconfinder.com/icondetails/65599/48/cash_gold_money_payment_icon
+		jTextField1.setEditable(true);
+		jButton1.setEnabled(true);
+		jButton3.setEnabled(true);
+		jButton4.setEnabled(true);
+		jButton5.setEnabled(true);
+		jButton6.setEnabled(true);
+		jButton7.setEnabled(true);
+		jButton8.setEnabled(true);
+		jButton9.setEnabled(true);
+		jButton10.setEnabled(true);
+		jButton11.setEnabled(true);
+		jButton12.setEnabled(true);
+
+		try {
+			Socket serverSocket = new Socket("localhost", 50898);
+			BufferedReader fromServer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
+			PrintWriter toServer = new PrintWriter(serverSocket.getOutputStream(), true);
+			(new Thread(new Listener(this, fromServer))).start();
+			(new Thread(new Speaker(this, toServer))).start();
 		}
+		catch (IOException e) {
+			System.err.println("Error: " + e);
+			System.exit(-1);
+		}
+
 	}
 
 	public static void main(String args[]) {
