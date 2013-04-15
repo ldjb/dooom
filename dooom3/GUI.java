@@ -13,6 +13,7 @@ public class GUI extends JFrame {
 		initComponents();
 		setTitle("Dungeon of Dooom");
 		//newGame();
+		targetField = "jTextArea2";
 	}
 
 	private void initComponents() {
@@ -415,9 +416,24 @@ public class GUI extends JFrame {
 	private BufferedReader fromServer;
 	private PrintWriter toServer;
 
+	private String targetField;
+
 	//temp stuff
-	public void print(String text) {
-		jTextArea1.append(text + "\n");
+	public void parseResponse(String text) {
+		if (text.equals("LOOKREPLY")) {
+			targetField = "jTextArea1";
+			jTextArea1.setText(null);
+		}
+		else if (text.equals("SUCCESS") || text.equals("FAIL")) {
+			targetField = "jTextArea2";
+			jTextArea2.setText(null);
+		}
+		else if (targetField.equals("jTextArea1")) {
+			jTextArea1.append(text + "\n");
+		}
+		else {
+			jTextArea2.append(text + "\n");
+		}
 	}
 
 
