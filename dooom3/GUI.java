@@ -429,6 +429,19 @@ public class GUI extends JFrame {
 			jTextArea2.setText(null);
 		}
 		else if (text.equals("ENDGAME")) {
+			jTextField1.setEditable(false);
+			jButton1.setEnabled(false);
+			jButton3.setEnabled(false);
+			jButton4.setEnabled(false);
+			jButton5.setEnabled(false);
+			jButton6.setEnabled(false);
+			jButton7.setEnabled(false);
+			jButton8.setEnabled(false);
+			jButton9.setEnabled(false);
+			jButton10.setEnabled(false);
+			jButton11.setEnabled(false);
+			jButton12.setEnabled(false);
+			jTextArea2.setText("The game has ended.");
 		}
 		else if (targetField.equals("jTextArea1")) {
 			jTextArea1.append(text + "\n");
