@@ -1,17 +1,18 @@
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class Server implements Runnable {
 // uses ideas from:
 // http://docs.oracle.com/javase/tutorial/networking/sockets/examples/KnockKnockServer.java
-
-	static int numOfClients = 0;
 
 	Socket clientSocket;
 	
 	static ServerSocket serverSocket;
 	
 	static DODMap map;
+	
+	static ArrayList<Socket> arrSockets = new ArrayList<Socket>();
 
 	public Server(Socket client) {
 		clientSocket = client;
@@ -33,14 +34,28 @@ public class Server implements Runnable {
 			out.close();
 			in.close();
 			clientSocket.close();
-			numOfClients--; // update number of connected clients
-			if (numOfClients == 0) { // if this is the last client, close socket
+			arrSockets.remove(clientSocket);
+			if (arrSockets.size() == 0) { // if this is the last client, close socket
 				serverSocket.close();
 			}
 		}
 		catch (Exception e) {
 			System.err.println("Error: " + e);
 			System.exit(-1);
+		}
+	}
+
+	public static void globalMessage(String msg) {
+		for (Socket client : arrSockets) {
+			try {
+				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+				out.println(msg);
+				out.close();
+			}
+			catch (Exception e) {
+				System.err.println("Error: " + e);
+				System.exit(-1);
+			}
 		}
 	}
 
@@ -67,13 +82,13 @@ public class Server implements Runnable {
 			do { // keep repeating while there are clients connected
 				try {
 					client = serverSocket.accept();
+					arrSockets.add(client);
 				}
 				catch (SocketException e) { // if socket has closed, quit program
 					System.exit(0);
 				}
 				(new Thread(new Server(client))).start();
-				numOfClients++; // keep track of how many clients there are
-			} while (numOfClients > 0);
+			} while (arrSockets.size() > 0);
 			serverSocket.close();
 		}
 		catch (Exception e) {

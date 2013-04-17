@@ -368,7 +368,7 @@ public class GUI extends JFrame {
 			fromServer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
 			toServer = new PrintWriter(serverSocket.getOutputStream(), true);
 			(new Thread(new Listener(this, fromServer))).start();
-			//(new Thread(new Speaker(this, toServer))).start();
+			toServer.println("LOOK");
 		}
 		catch (IOException e) {
 			System.err.println("Error: " + e);
@@ -427,6 +427,8 @@ public class GUI extends JFrame {
 		else if (text.equals("SUCCESS") || text.equals("FAIL")) {
 			targetField = "jTextArea2";
 			jTextArea2.setText(null);
+		}
+		else if (text.equals("ENDGAME")) {
 		}
 		else if (targetField.equals("jTextArea1")) {
 			jTextArea1.append(text + "\n");

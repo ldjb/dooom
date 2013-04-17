@@ -94,6 +94,7 @@ public class NetDODGame
     		(dodMap.getMap()[player.getY()][player.getX()] == DODMap.EXIT)) 
     	{
     		printMessageFromGame("WIN");
+    		Server.globalMessage("ENDGAME");
 			System.exit(0);
 		}
     	else
