@@ -286,6 +286,7 @@ public class NetDODGame
 					player.incrementHealth();
 					
 					// ... notify the client ...
+					Server.globalMessage("UPDATE");
 					advanceTurn();
 					return "SUCCESS:  +1 HP \n Total HP = " + player.getHp();
 					
@@ -302,6 +303,7 @@ public class NetDODGame
 					    
 					    // ... give them a lantern ...
 					    player.setLantern(1);
+					    Server.globalMessage("UPDATE");
 					    advanceTurn();
 					    return "SUCCESS: Got Lantern";
 					} 
@@ -321,6 +323,7 @@ public class NetDODGame
 					    dodMap.setMapCell(player.getY(), player.getX(), DODMap.EMPTY);
 					    
 					    player.setSword(1);
+					    Server.globalMessage("UPDATE");
 					    advanceTurn();
 					    return "SUCCESS: Got Sword";
 					} 
@@ -340,6 +343,7 @@ public class NetDODGame
 					    dodMap.setMapCell(player.getY(), player.getX(), DODMap.EMPTY);
 					    
 					    player.setArmour(1);
+					    Server.globalMessage("UPDATE");
 					    advanceTurn();
 					    return "SUCCESS: Got Armour";
 					} 
@@ -360,6 +364,7 @@ public class NetDODGame
 				    // Add to the amount of treasure
 				    player.addGold(1); 
 				    
+				    Server.globalMessage("UPDATE");
 				    advanceTurn();
 				    return "SUCCESS: + 1 Gold. Total Gold = " + player.getGold();   
 				

@@ -428,6 +428,9 @@ public class GUI extends JFrame {
 			targetField = "jTextArea2";
 			jTextArea2.setText(null);
 		}
+		else if (text.equals("UPDATE")) {
+			toServer.println("LOOK");
+		}
 		else if (text.equals("ENDGAME")) {
 			jTextField1.setEditable(false);
 			jButton1.setEnabled(false);

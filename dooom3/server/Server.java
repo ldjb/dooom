@@ -50,7 +50,6 @@ public class Server implements Runnable {
 			try {
 				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 				out.println(msg);
-				out.close();
 			}
 			catch (Exception e) {
 				System.err.println("Error: " + e);
