@@ -418,6 +418,7 @@ public class GUI extends JFrame {
 	private PrintWriter toServer;
 
 	private String targetField;
+	private int goal = 0;
 
 	//temp stuff
 	public void parseResponse(String text) {
@@ -447,9 +448,11 @@ public class GUI extends JFrame {
 			jButton12.setEnabled(false);
 			jTextArea2.setText("The game has ended.");
 		}
-		else if (text.startsWith("HELLO")) {
+		else if (text.startsWith("HELLO ")) {
 		}
-		else if (text.startsWith("GOAL")) {
+		else if (text.startsWith("GOAL ")) {
+			goal = Integer.parseInt(text.substring(5));
+			jLabel2.setText("0 / " + text.substring(5));
 		}
 		else if (targetField.equals("jTextArea1")) {
 			jTextArea1.append(text + "\n");
