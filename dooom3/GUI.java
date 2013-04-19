@@ -540,7 +540,12 @@ public class GUI extends JFrame {
 			jButton10.setEnabled(false);
 			jButton11.setEnabled(false);
 			jButton12.setEnabled(false);
-			jTextArea2.setText("The game has ended.");
+			if (gold >= goal) {
+				jTextArea2.setText("You win!");
+			}
+			else {
+				jTextArea2.setText("You lose!");
+			}
 		}
 		else if (text.startsWith("HELLO ")) {
 			jLabel1.setText(text.substring(6));
