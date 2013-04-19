@@ -12,7 +12,6 @@ public class GUI extends JFrame {
 	private GUI() {
 		initComponents();
 		setTitle("Dungeon of Dooom");
-		//newGame();
 		targetField = "jTextArea2";
 	}
 
@@ -77,7 +76,7 @@ public class GUI extends JFrame {
 			}
 		});
 
-		jLabel1.setFont(new Font("Serif", 0, 24)); // NOI18N
+		jLabel1.setFont(new Font("Serif", 0, 24));
 		jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		jButton1.setEnabled(false);
