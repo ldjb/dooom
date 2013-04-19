@@ -325,7 +325,7 @@ public class GUI extends JFrame {
 
 	private void formSubmitted() {
 		if (!jTextField1.getText().equals("")) {
-			formSubmitted(jTextField1.getText());
+			formSubmitted("SHOUT " + jTextField1.getText());
 			jTextField1.setText(null);
 		}
 	}
@@ -458,6 +458,9 @@ public class GUI extends JFrame {
 		else if (text.startsWith("TREASUREMOD ")) {
 			gold += Integer.parseInt(text.substring(12));
 			jLabel2.setText(Integer.toString(gold) + " / " + Integer.toString(goal));
+		}
+		else if (text.startsWith("MESSAGE ")) {
+			jTextArea2.append("\"" + text.substring(8) + "\"\n");
 		}
 		else if (text.startsWith("ERROR ")) {
 			jTextArea2.setText(text.substring(6) + "\n");

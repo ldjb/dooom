@@ -249,6 +249,7 @@ public class NetDODGame
      */
     public String clientShout(String message) 
     {
+    	Server.globalMessage("MESSAGE " + message);
 		return "MESSAGE: \n\t" + message;
     }
     
