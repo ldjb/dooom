@@ -30,6 +30,7 @@ public class GUI extends JFrame {
 		jMenuBar1 = new JMenuBar();
 		jMenu1 = new JMenu();
 		jMenuItem1 = new JMenuItem();
+		jMenuItem1andahalf = new JMenuItem();
 		jMenuItem2 = new JMenuItem();
 		jMenuItem3 = new JMenuItem();
 		jMenuItem4 = new JMenuItem();
@@ -89,13 +90,23 @@ public class GUI extends JFrame {
 
 		jMenu1.setText("Game");
 
-		jMenuItem1.setText("Start");
+		jMenuItem1.setText("Start single player game");
 		jMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
+				SINGLE_PLAYER = true;
 				newGame();
 			}
 		});
 		jMenu1.add(jMenuItem1);
+		
+		jMenuItem1andahalf.setText("Start network game");
+		jMenuItem1andahalf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				SINGLE_PLAYER = false;
+				newGame();
+			}
+		});
+		jMenu1.add(jMenuItem1andahalf);
 
 		jMenuItem2.setText("Quit");
 		jMenuItem2.addActionListener(new ActionListener() {
@@ -325,14 +336,65 @@ public class GUI extends JFrame {
 
 	private void formSubmitted() {
 		if (!jTextField1.getText().equals("")) {
-			formSubmitted("SHOUT " + jTextField1.getText());
+			if (SINGLE_PLAYER) {
+			jTextArea2.setText(GameLogic.processCommand(jTextField1.getText()));
 			jTextField1.setText(null);
+			jTextArea1.setText(Map.get('P', GameLogic.getCoords()[0], GameLogic.getCoords()[1]));
+			jLabel2.setText(Integer.toString(GameLogic.getGold()) + "/" + Integer.toString(GameLogic.getWin()));
+			if (GameLogic.getGold() >= GameLogic.getWin()) {
+				jLabel2.setFont(new Font(jLabel2.getFont().getName(), Font.BOLD, jLabel2.getFont().getSize()));
+			}
+			if (jTextArea2.getText().startsWith("Congrat")) {
+				jTextField1.setEditable(false);
+				jButton1.setEnabled(false);
+				jButton3.setEnabled(false);
+				jButton4.setEnabled(false);
+				jButton5.setEnabled(false);
+				jButton6.setEnabled(false);
+				jButton7.setEnabled(false);
+				jButton8.setEnabled(false);
+				jButton9.setEnabled(false);
+				jButton10.setEnabled(false);
+				jButton11.setEnabled(false);
+				jButton12.setEnabled(false);
+				this.requestFocusInWindow();
+			}
+			}
+			else {
+				formSubmitted("SHOUT " + jTextField1.getText());
+				jTextField1.setText(null);
+			}
 		}
 	}
 
 	private void formSubmitted(String command) {
-		toServer.println(command);
-		toServer.println("LOOK");
+		if (SINGLE_PLAYER) {
+		jTextArea2.setText(GameLogic.processCommand(command));
+		jTextArea1.setText(Map.get('P', GameLogic.getCoords()[0], GameLogic.getCoords()[1]));
+		jLabel2.setText(Integer.toString(GameLogic.getGold()) + "/" + Integer.toString(GameLogic.getWin()));
+		if (GameLogic.getGold() >= GameLogic.getWin()) {
+			jLabel2.setFont(new Font(jLabel2.getFont().getName(), Font.BOLD, jLabel2.getFont().getSize()));
+		}
+		if (jTextArea2.getText().startsWith("Congrat")) {
+			jTextField1.setEditable(false);
+			jButton1.setEnabled(false);
+			jButton3.setEnabled(false);
+			jButton4.setEnabled(false);
+			jButton5.setEnabled(false);
+			jButton6.setEnabled(false);
+			jButton7.setEnabled(false);
+			jButton8.setEnabled(false);
+			jButton9.setEnabled(false);
+			jButton10.setEnabled(false);
+			jButton11.setEnabled(false);
+			jButton12.setEnabled(false);
+			this.requestFocusInWindow();
+		}
+		}
+		else {
+			toServer.println(command);
+			toServer.println("LOOK");
+		}
 	}
 	
 	private void aboutDialogue() {
@@ -347,35 +409,64 @@ public class GUI extends JFrame {
 		}
 	}
 
-	private void newGame() {
-		jMenuItem1.setEnabled(false);
-		jLabel2.setIcon(new ImageIcon("resources/gold.png")); // http://www.iconfinder.com/icondetails/65599/48/cash_gold_money_payment_icon
-		jTextField1.setEditable(true);
-		jButton1.setEnabled(true);
-		jButton3.setEnabled(true);
-		jButton4.setEnabled(true);
-		jButton5.setEnabled(true);
-		jButton6.setEnabled(true);
-		jButton7.setEnabled(true);
-		jButton8.setEnabled(true);
-		jButton9.setEnabled(true);
-		jButton10.setEnabled(true);
-		jButton11.setEnabled(true);
-		jButton12.setEnabled(true);
-
-		try {
-			serverSocket = new Socket("localhost", 50898);
-			fromServer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
-			toServer = new PrintWriter(serverSocket.getOutputStream(), true);
-			(new Thread(new Listener(this, fromServer))).start();
-			toServer.println("HELLO");
-			toServer.println("LOOK");
+	public void newGame() {
+		if (SINGLE_PLAYER) {
+			JFileChooser fc = new JFileChooser("maps");
+			if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+				jMenuItem1.setEnabled(false);
+				jMenuItem1andahalf.setEnabled(false);
+				GameLogic.init(fc.getSelectedFile().toString());
+				jLabel1.setText(GameLogic.getMapName());
+				jTextArea1.setText(Map.get('P', GameLogic.getCoords()[0], GameLogic.getCoords()[1]));
+				jLabel2.setText(Integer.toString(GameLogic.getGold()) + "/" + Integer.toString(GameLogic.getWin()));
+				if (GameLogic.getGold() >= GameLogic.getWin()) {
+					jLabel2.setFont(new Font(jLabel2.getFont().getName(), Font.BOLD, jLabel2.getFont().getSize()));
+				}
+				jLabel2.setIcon(new ImageIcon("resources/gold.png")); // http://www.iconfinder.com/icondetails/65599/48/cash_gold_money_payment_icon
+				jTextField1.setEditable(true);
+				jButton1.setEnabled(true);
+				jButton3.setEnabled(true);
+				jButton4.setEnabled(true);
+				jButton5.setEnabled(true);
+				jButton6.setEnabled(true);
+				jButton7.setEnabled(true);
+				jButton8.setEnabled(true);
+				jButton9.setEnabled(true);
+				jButton10.setEnabled(true);
+				jButton11.setEnabled(true);
+				jButton12.setEnabled(true);
+			}
 		}
-		catch (IOException e) {
-			System.err.println("Error: " + e);
-			System.exit(-1);
-		}
+		else {
+			jMenuItem1.setEnabled(false);
+			jMenuItem1andahalf.setEnabled(false);
+			jLabel2.setIcon(new ImageIcon("resources/gold.png")); // http://www.iconfinder.com/icondetails/65599/48/cash_gold_money_payment_icon
+			jTextField1.setEditable(true);
+			jButton1.setEnabled(true);
+			jButton3.setEnabled(true);
+			jButton4.setEnabled(true);
+			jButton5.setEnabled(true);
+			jButton6.setEnabled(true);
+			jButton7.setEnabled(true);
+			jButton8.setEnabled(true);
+			jButton9.setEnabled(true);
+			jButton10.setEnabled(true);
+			jButton11.setEnabled(true);
+			jButton12.setEnabled(true);
 
+			try {
+				serverSocket = new Socket("localhost", 50898);
+				fromServer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
+				toServer = new PrintWriter(serverSocket.getOutputStream(), true);
+				(new Thread(new Listener(this, fromServer))).start();
+				toServer.println("HELLO");
+				toServer.println("LOOK");
+			}
+			catch (IOException e) {
+				System.err.println("Error: " + e);
+				System.exit(-1);
+			}
+		}
 	}
 
 	public static void main(String args[]) {
@@ -390,6 +481,7 @@ public class GUI extends JFrame {
 	private JMenu jMenu2;
 	private JMenuBar jMenuBar1;
 	private JMenuItem jMenuItem1;
+	private JMenuItem jMenuItem1andahalf;
 	private JMenuItem jMenuItem2;
 	private JMenuItem jMenuItem3;
 	private JMenuItem jMenuItem4;
@@ -420,6 +512,7 @@ public class GUI extends JFrame {
 	private String targetField;
 	private int goal = 0;
 	private int gold = 0;
+	private boolean SINGLE_PLAYER;
 
 	//temp stuff
 	public void parseResponse(String text) {
