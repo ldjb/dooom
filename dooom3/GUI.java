@@ -450,6 +450,7 @@ public class GUI extends JFrame {
 			jTextArea2.setText("The game has ended.");
 		}
 		else if (text.startsWith("HELLO ")) {
+			jLabel1.setText(text.substring(6));
 		}
 		else if (text.startsWith("GOAL ")) {
 			goal = Integer.parseInt(text.substring(5));
