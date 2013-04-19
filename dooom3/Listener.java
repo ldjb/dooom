@@ -18,7 +18,6 @@ public class Listener implements Runnable {
 			// keep printing data received from server
 			while ((line = fromServer.readLine()) != null) {
 				gui.parseResponse(line);
-				System.out.println(line);
 			}
 		}
 		catch (Exception e) {
