@@ -514,7 +514,7 @@ public class NetDODGame
 		     *  
 		     */
 
-			return "FAIL attacking has not been implemented";
+			return "ERROR Attacking has not been implemented.";
 		    
 		} 
 		else 

@@ -459,6 +459,9 @@ public class GUI extends JFrame {
 			gold += Integer.parseInt(text.substring(12));
 			jLabel2.setText(Integer.toString(gold) + " / " + Integer.toString(goal));
 		}
+		else if (text.startsWith("ERROR ")) {
+			jTextArea2.setText(text.substring(6) + "\n");
+		}
 		else if (targetField.equals("jTextArea1")) {
 			jTextArea1.append(text + "\n");
 		}
