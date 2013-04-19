@@ -366,7 +366,8 @@ public class NetDODGame
 				    
 				    Server.globalMessage("UPDATE");
 				    advanceTurn();
-				    return "SUCCESS: + 1 Gold. Total Gold = " + player.getGold();   
+				    //return "SUCCESS: + 1 Gold. Total Gold = " + player.getGold();   
+				    return "TREASUREMOD 1";
 				
 			    default:
 				    	

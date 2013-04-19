@@ -419,6 +419,7 @@ public class GUI extends JFrame {
 
 	private String targetField;
 	private int goal = 0;
+	private int gold = 0;
 
 	//temp stuff
 	public void parseResponse(String text) {
@@ -453,6 +454,10 @@ public class GUI extends JFrame {
 		else if (text.startsWith("GOAL ")) {
 			goal = Integer.parseInt(text.substring(5));
 			jLabel2.setText("0 / " + text.substring(5));
+		}
+		else if (text.startsWith("TREASUREMOD ")) {
+			gold += Integer.parseInt(text.substring(12));
+			jLabel2.setText(Integer.toString(gold) + " / " + Integer.toString(goal));
 		}
 		else if (targetField.equals("jTextArea1")) {
 			jTextArea1.append(text + "\n");
