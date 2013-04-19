@@ -368,6 +368,7 @@ public class GUI extends JFrame {
 			fromServer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
 			toServer = new PrintWriter(serverSocket.getOutputStream(), true);
 			(new Thread(new Listener(this, fromServer))).start();
+			toServer.println("HELLO");
 			toServer.println("LOOK");
 		}
 		catch (IOException e) {
@@ -445,6 +446,10 @@ public class GUI extends JFrame {
 			jButton11.setEnabled(false);
 			jButton12.setEnabled(false);
 			jTextArea2.setText("The game has ended.");
+		}
+		else if (text.startsWith("HELLO")) {
+		}
+		else if (text.startsWith("GOAL")) {
 		}
 		else if (targetField.equals("jTextArea1")) {
 			jTextArea1.append(text + "\n");

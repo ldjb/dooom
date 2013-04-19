@@ -97,9 +97,12 @@ public class Protocol
 		{
 			if (tmp.length != 2) 
 			{
-				return null;
+				message = game.clientHello("Player 1");
 			}
-			message = game.clientHello(sanitise(arg));
+			else
+			{
+				message = game.clientHello(sanitise(arg));
+			}
 		} 
 		else if (com.equals("LOOK")) 
 		{
